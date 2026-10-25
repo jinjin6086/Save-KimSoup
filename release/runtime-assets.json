@@ -1,0 +1,411 @@
+{
+  "version": "1.15",
+  "source": "Release ZIP",
+  "files": [
+    {
+      "path": "Assets/Audio/CC0-KARORYFER-VOCAL-LICENSE.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "Assets/Audio/CC0-SHINYGUITAR-LICENSE.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "Assets/Audio/CC0-VSCO-2-CE-LICENSE.txt",
+      "bytes": 6555,
+      "sha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673"
+    },
+    {
+      "path": "Assets/Audio/ORCHESTRA-CREDITS.txt",
+      "bytes": 2661,
+      "sha256": "e54af22da4367f0d2dfb1e906582f170be736d2b4c56222498c2060d132e3d02"
+    },
+    {
+      "path": "Assets/Audio/ROCK-CREDITS.txt",
+      "bytes": 743,
+      "sha256": "27d47ccbfcfda8a2d97651d5947d18302e655b798e581598cc9a8f260cc384f3"
+    },
+    {
+      "path": "Assets/Audio/RODIAN-SONG-CREDITS.txt",
+      "bytes": 902,
+      "sha256": "d2c345aa1e32e942f079ef47c5775386ab19d266859fa4c567e6e55ac7515dff"
+    },
+    {
+      "path": "Assets/Audio/score-1.pcm",
+      "bytes": 9072000,
+      "sha256": "30d8501fe8a198876286f37ab0487af7f65750bb459f8708183b6f5b57ba5ce7"
+    },
+    {
+      "path": "Assets/Audio/score-10.pcm",
+      "bytes": 3969000,
+      "sha256": "fe93a42a2a331d5884d70fd19ab36ddf4bca7f3171e0b5c3ffc7bc38cd71be28"
+    },
+    {
+      "path": "Assets/Audio/score-12.pcm",
+      "bytes": 15981840,
+      "sha256": "f3737f27f447564db673af89b5065beb09e7b4262ec60d5961c749d3741aa851"
+    },
+    {
+      "path": "Assets/Audio/score-13.pcm",
+      "bytes": 9031680,
+      "sha256": "e9f2c6816d7ec75f762dca97e4e418b803b2e8f1a9a92a8d11bbf5426efe7249"
+    },
+    {
+      "path": "Assets/Audio/score-2.pcm",
+      "bytes": 13026460,
+      "sha256": "f604d43af01202ce47ac5b97f09917e69910b16e04554d570d580c1443207704"
+    },
+    {
+      "path": "Assets/Audio/score-3.pcm",
+      "bytes": 9769848,
+      "sha256": "c04725ee11be38e5c3ed636b1b655a17effa477bc925b03e97fe9a8e0930a098"
+    },
+    {
+      "path": "Assets/Audio/score-4.pcm",
+      "bytes": 11546180,
+      "sha256": "6478dc3b08604aaad3bfc9402d152f08cfc6ee94429af45d1490a4416a207f31"
+    },
+    {
+      "path": "Assets/Audio/score-7.pcm",
+      "bytes": 8064000,
+      "sha256": "cc73fc87da5a73a59e5800327f1139e7735d8eacbc67deae4c472409081e9ce5"
+    },
+    {
+      "path": "Assets/Audio/score-8.pcm",
+      "bytes": 9072000,
+      "sha256": "7ab71639764663f2ce58324ce44cb82d25c9e88aeb38de3f193bd6cb81e48a13"
+    },
+    {
+      "path": "Assets/Audio/score-9.pcm",
+      "bytes": 4286520,
+      "sha256": "5bf9ea75178f2097b793c8846166aad1d09ef17b4e582116587d39f6f1c2b00f"
+    },
+    {
+      "path": "Assets/Audio/score-metadata.json",
+      "bytes": 18684,
+      "sha256": "c4af8a3e38e2f79fc92938a8ed6c972c7db784958eb981aa3ef0fe45c6e80bf5"
+    },
+    {
+      "path": "Assets/AuraMaterials.png",
+      "bytes": 2851216,
+      "sha256": "0c22133ebc8f6e30057c1196065c071b485dd33a8fcca7ff76ca3a066ed3a839"
+    },
+    {
+      "path": "Assets/BossAttackDoll.png",
+      "bytes": 2637847,
+      "sha256": "937f9025030b926d52c8532a27eb5cb15e917e6dc899a5cb4ca18c1382003b04"
+    },
+    {
+      "path": "Assets/BossAttackGolem.png",
+      "bytes": 3062889,
+      "sha256": "2ed5ddd5d72fa75f762bfdb0a8fb2d29fa83eab1e31b4695b0c066fac79bbe0d"
+    },
+    {
+      "path": "Assets/BossAttackIsangjin.png",
+      "bytes": 2721935,
+      "sha256": "dad3c8b52217a420ae68380032d50901cbe4ae983e7f290753ed5f431ef4370a"
+    },
+    {
+      "path": "Assets/BossAttackPurgae.png",
+      "bytes": 3482488,
+      "sha256": "28204461070b080cfe59a7f1ba0b143aff7b63f9509b44aa7778764ed0d7c8d0"
+    },
+    {
+      "path": "Assets/BossAttackRodian.png",
+      "bytes": 2873802,
+      "sha256": "7e462a8440686a427dc402ddd7100a9880e3494085cc6fd7235b33dd048c77bf"
+    },
+    {
+      "path": "Assets/BossAttackTruePurgae.png",
+      "bytes": 3230396,
+      "sha256": "558911c5874e53fab7a1642d294d1527761ef8f7eacf57f41006169e84f277b4"
+    },
+    {
+      "path": "Assets/CinderFlameKunai.png",
+      "bytes": 1843455,
+      "sha256": "0f229b766ae29a3d0b7ccdbb43510064fed0f8ef4386fd9e076c2dafe98a99ac"
+    },
+    {
+      "path": "Assets/CinderGolemActions.png",
+      "bytes": 2413165,
+      "sha256": "99cf7bb1a89385daff2c462dbee824b076c4e2b75765c5784e2e3748e7a05483"
+    },
+    {
+      "path": "Assets/CinderGolemMotion.png",
+      "bytes": 2538802,
+      "sha256": "f88b7de5dc5d2f041b6ba9f793f092bef0539404932311791fdedeea2cc2e80f"
+    },
+    {
+      "path": "Assets/CinderImmolation.png",
+      "bytes": 3073847,
+      "sha256": "25915c52fb47110f1c6e431aa63a80b54c455a1f23d53e5dfbd9f3c57ce57d73"
+    },
+    {
+      "path": "Assets/CollisionDeflectionHD.png",
+      "bytes": 2190877,
+      "sha256": "dfdacf44c317acc645a24da43b909ab0b83cea1fc08dfde46f39e8f61fc9c8ab"
+    },
+    {
+      "path": "Assets/CollisionFlowHD.png",
+      "bytes": 2290679,
+      "sha256": "b8a8382a221b33a1c03e3e1d2e6b2cbdada2b903d8ccea9264c073c525a47c79"
+    },
+    {
+      "path": "Assets/CollisionPlasmaHD.png",
+      "bytes": 2720666,
+      "sha256": "304d8ff9641607e43aaff11e8cff9a919afb309fde6c9ccbb57aef74caa860bc"
+    },
+    {
+      "path": "Assets/DialogueJua-OFL.txt",
+      "bytes": 4342,
+      "sha256": "44a7c6e4c5572392ae122d3b1d8c6ba6fd640a7797e675384585d947f2773e3c"
+    },
+    {
+      "path": "Assets/DialogueJua-Regular.ttf",
+      "bytes": 2119352,
+      "sha256": "769677aef240bfc3b9965f2b50748075bff885e6c6992fc591a3fb268279f898"
+    },
+    {
+      "path": "Assets/EndingHome.png",
+      "bytes": 2471964,
+      "sha256": "8f297297bf7b715e6b68ddbd349c52a80b001b31614b987350e7035743a58bad"
+    },
+    {
+      "path": "Assets/enemy1.png",
+      "bytes": 2229170,
+      "sha256": "3a10eece6f2e52739ae5e58b9280a0bc1e7337840f86dc51b01f0b429705d9b4"
+    },
+    {
+      "path": "Assets/enemy2.png",
+      "bytes": 789178,
+      "sha256": "6695d7853d3416f83c6515338a69658a3e5ac7a16c35fae3225fbabbb958d925"
+    },
+    {
+      "path": "Assets/enemy3.png",
+      "bytes": 1102939,
+      "sha256": "fc35b8d87a8b284f125066b67d4de988843fe040ca0e7b19652fa10b52336a0a"
+    },
+    {
+      "path": "Assets/enemy4.png",
+      "bytes": 395040,
+      "sha256": "4ba1abb916c98b77b1d023b39a69cae6847cf6185639f72d8d6d2adbf97c396f"
+    },
+    {
+      "path": "Assets/enemy5.png",
+      "bytes": 178665,
+      "sha256": "5fc5ca8e67ef831cf2db80969786b86ac6346fa239e5fb2762c6089df6fdcf14"
+    },
+    {
+      "path": "Assets/enemy6.png",
+      "bytes": 1564050,
+      "sha256": "362ecbe75d33e877005c9746eb61f1db9e165f8debb337a368bfe8fcd04a3048"
+    },
+    {
+      "path": "Assets/enemy7.png",
+      "bytes": 1348399,
+      "sha256": "26d0c5af767371c3db4cab29e1d44e723b45cf68df51fe4baaa8cca3bf0c4fcc"
+    },
+    {
+      "path": "Assets/Enemy7Cutout.png",
+      "bytes": 2696904,
+      "sha256": "eda6abba6846d25d79edbe9101cba523e9955cc8bd09e7fa6de4fbf47a86339c"
+    },
+    {
+      "path": "Assets/enemy8.png",
+      "bytes": 895262,
+      "sha256": "832b2b729e181ddc1e03d74a7fc092201f3e32e02a14ad79adf9cd1ed93b9c45"
+    },
+    {
+      "path": "Assets/FinalBeamHD.png",
+      "bytes": 2430655,
+      "sha256": "52123224ad031a6964af4483e5ad5b2ad975838044e13563936d7254ad87b93f"
+    },
+    {
+      "path": "Assets/FinalDetonationHD.png",
+      "bytes": 2563569,
+      "sha256": "2089ca7e38938cba1c76fcbdc7ef86b3cc4ca977563c63405a772208868b1b94"
+    },
+    {
+      "path": "Assets/FinalJunctionHD.png",
+      "bytes": 2615755,
+      "sha256": "e1e0ea0500e73cdc622189dd343ab8c12a71ad3189aa88a469e35a8855b5c099"
+    },
+    {
+      "path": "Assets/FlameKunaiPure.png",
+      "bytes": 1271399,
+      "sha256": "22501c830b986a7e8f31df296db2e720571311870306e6b9f7a0fa5dc60116c1"
+    },
+    {
+      "path": "Assets/FuriosoFlameHD.png",
+      "bytes": 1724720,
+      "sha256": "365287cd5abe9621b271e4f2f4df2f9375d178d2cab093ac6d16274faf32d207"
+    },
+    {
+      "path": "Assets/GpuVfx.hlsl",
+      "bytes": 36631,
+      "sha256": "5fa48085c0726fafbaee6354a8c54061a88627a6d68f8794dc2ed417c8497e9b"
+    },
+    {
+      "path": "Assets/GpuVfx.ps.cso",
+      "bytes": 365080,
+      "sha256": "036edf85cef0f7371299c5e4c88ba9f1255ec8f7bc1538bdcfa417d45bf1be43"
+    },
+    {
+      "path": "Assets/GpuVfx.vs.cso",
+      "bytes": 776,
+      "sha256": "5216e012d41265f0fe19e288a423dcdbfc2f020d232f556a49fc924131a6ba2b"
+    },
+    {
+      "path": "Assets/HeroDialogueCutout.png",
+      "bytes": 1532784,
+      "sha256": "2f8f63e48e4797203954d4d522a22e5765277ed8fa6f0789cdedcafe76a57fee"
+    },
+    {
+      "path": "Assets/HeroFinaleHD.png",
+      "bytes": 934170,
+      "sha256": "a037881114d9a2bc9f3df9077f946f4cf896166f8971d7aa2cc3347846d53893"
+    },
+    {
+      "path": "Assets/HeroFinaleMotion8.png",
+      "bytes": 1207399,
+      "sha256": "93929bece078a8a1a123bab382593ff26e15081ad8ca3dffe963aaf9692285dc"
+    },
+    {
+      "path": "Assets/IsangjinShardAtlas.png",
+      "bytes": 702029,
+      "sha256": "742c62cc9a88a8c21cd4e4b4770127a359cf9faa9d8ccba87619c927a40e5310"
+    },
+    {
+      "path": "Assets/MelodyActions.png",
+      "bytes": 1315283,
+      "sha256": "65a9c169d45875f08074e0063810696ab89f3421f37aab61b98dc7572f9ae010"
+    },
+    {
+      "path": "Assets/MelodyFinaleHD.png",
+      "bytes": 1955967,
+      "sha256": "73c4faf5d752e190b29e06b2cb3e4cb1ab6f11e87feee9ca96d61a227e52719b"
+    },
+    {
+      "path": "Assets/MelodyMenhera.png",
+      "bytes": 1942135,
+      "sha256": "e7fb98eee37a4ac9afc0577fbb083b915f1e165f2e0a9b927ed26d51a02b2b39"
+    },
+    {
+      "path": "Assets/MeteorCore.png",
+      "bytes": 2370942,
+      "sha256": "20f7d6cf37605f5e8bda83f80efb29805006319047b89efd425f0c2af52fd4fc"
+    },
+    {
+      "path": "Assets/MeteorHD.png",
+      "bytes": 1888099,
+      "sha256": "86cc2774950c64da1935f6a0c0005c90091f6ed2c86f8335a331ab605d8409b4"
+    },
+    {
+      "path": "Assets/PhantomSideKick.png",
+      "bytes": 2109658,
+      "sha256": "fd6629a911012ecdf56a42843e9a3f10737fbfca12ec113c75dc1d09a5267cae"
+    },
+    {
+      "path": "Assets/Player1.png",
+      "bytes": 903303,
+      "sha256": "d578e26c84a8fad0a64d090b11baddd458b14ad35ea58984d5207839bace5414"
+    },
+    {
+      "path": "Assets/Player2.png",
+      "bytes": 765170,
+      "sha256": "a4a43d3ffb1fe58fcb05f6051c6ef319337972a6702285e50490b307754f5aae"
+    },
+    {
+      "path": "Assets/player3.png",
+      "bytes": 1455508,
+      "sha256": "d07642191c25f1d8cd4fc7fc5c0983a33fc1ee732618ca74d7503247c5f4ab96"
+    },
+    {
+      "path": "Assets/PlayerClockMotion6.png",
+      "bytes": 1891830,
+      "sha256": "76069c1ef8419e6eb6fd1521abfa9c6d1aa9a3f8b9cb9a233ea298666377dbb1"
+    },
+    {
+      "path": "Assets/PlayerKick.png",
+      "bytes": 763343,
+      "sha256": "9bb550df9c4dcbe276e27614311d03841f2429323db9cb280d7a65367833e30e"
+    },
+    {
+      "path": "Assets/PlayerMotion.png",
+      "bytes": 1947264,
+      "sha256": "4c46a95f02d5737011f4d1f968f43bd43c110b26fab5dc2fd22897c35fe2c872"
+    },
+    {
+      "path": "Assets/PlayerSlide.png",
+      "bytes": 828044,
+      "sha256": "66daefb3599349cb245004801d9672d9472f7f093fe9a220f2a4647a04ef6d6a"
+    },
+    {
+      "path": "Assets/PurgaeAscendedFrames.paf",
+      "bytes": 21594813,
+      "sha256": "a9c34c4944028dcbadf3c0cf97b8447f46df55bcae90f0ec348f4da685582d4e"
+    },
+    {
+      "path": "Assets/PurgaeNormalFrames.paf",
+      "bytes": 19785433,
+      "sha256": "cfa289ea0f488177123d189599b0aa7bb6001ad0c865f3e0f7fb90999f8735c6"
+    },
+    {
+      "path": "Assets/PurgaeRageFrames.paf",
+      "bytes": 21505827,
+      "sha256": "115d5bd05889d078a72062f201e21814e54dab9c9f88cc2abdfdb71e786639d1"
+    },
+    {
+      "path": "Assets/PurgaeShinyOrbs.paf",
+      "bytes": 2788238,
+      "sha256": "b3faa7f583294b8d904cd32f5313b0370b4e56f8b72ae0475f26a38acfd555fd"
+    },
+    {
+      "path": "Assets/RibbonLaserHD.png",
+      "bytes": 2243091,
+      "sha256": "02bc9aaa0d5344b71cfe56d7210a9843077793965741d8527689cd27415abe75"
+    },
+    {
+      "path": "Assets/RodianDialogueMenhera.png",
+      "bytes": 3080398,
+      "sha256": "6a174444f62bf0f6a26db83602958817e108157d7b62a15a9cdeb3b116e1e277"
+    },
+    {
+      "path": "Assets/RodianDialogueNormal.png",
+      "bytes": 2543631,
+      "sha256": "105cb66e852060cdaf30ad446643c32b67f3e64fa0ecbaa1980ed11e3636112c"
+    },
+    {
+      "path": "Assets/RodianLastVow6.png",
+      "bytes": 2646919,
+      "sha256": "1b9db908c96216cce8185a64857d926fffe9fec808fb8055dc7d729d47aba7f4"
+    },
+    {
+      "path": "Assets/WolfPlayerMotion12.png",
+      "bytes": 1630312,
+      "sha256": "1c139598b1ce391414bad01e16020ccf61fdca1795d092b67d3dc38c90a0754f"
+    },
+    {
+      "path": "Assets/World1Meadow.png",
+      "bytes": 2406235,
+      "sha256": "bfc19ea007cbee09c4b71a504128d85384b6b17660d8e116d3405cac02c98c8d"
+    },
+    {
+      "path": "Assets/World2Prison.png",
+      "bytes": 2235447,
+      "sha256": "b002710553abbb9731efa6ed7853152a0b6cc0415ccb75660e2acce850182133"
+    },
+    {
+      "path": "Assets/World3Hell.png",
+      "bytes": 2095338,
+      "sha256": "d2907669c6cc978f93cb3f6241c6da19e9e7224065d9e3a71440423c40776f1d"
+    },
+    {
+      "path": "Assets/World4Concert.png",
+      "bytes": 2261362,
+      "sha256": "9c8eefb6084dbc075d2102d89e672ff505fc0e2eac37b9b902d72038628cf918"
+    }
+  ]
+}

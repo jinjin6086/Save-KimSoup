@@ -1,0 +1,19 @@
+{
+  "version": "1.15",
+  "sequence": 15,
+  "date": "2026-10-25",
+  "file": "승쿠런 1.15 버전.zip",
+  "bytes": 303345097,
+  "sha256": "3b7149ef8b5f0276fe3091a0b32ac0f1dc95050d5af90ec84eacdf3ef32a94ef",
+  "executable": "승쿠런 1.15 버전/승쿠런 1.15 버전.exe",
+  "platform": "Windows x64",
+  "self_contained": true,
+  "verification": {
+    "build_errors": 0,
+    "build_warnings": 0,
+    "automated_checks_passed": 452,
+    "gpu_qte_success_failure_exit": true,
+    "standalone_startup": true,
+    "manual_gameplay_and_audio_review": false
+  }
+}

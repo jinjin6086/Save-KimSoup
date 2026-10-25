@@ -1,0 +1,6 @@
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+src/CookieRunVS2026/Assets/
