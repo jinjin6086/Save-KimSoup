@@ -143,7 +143,7 @@ public sealed partial class GamePanel
         if(lastStandPhase==10)
         {
             float fade=SmoothUnit((lastStandClock-28)/18)*(1-SmoothUnit((lastStandClock-138)/12));
-            Label(g,"이젠 다 필요없어...",new(80,549,840,45),25,Color.FromArgb((int)(255*fade),196,187,197));
+            Label(g,"내가 그딴 돼지보다 내가 훨씬 낫잖아",new(80,549,840,45),25,Color.FromArgb((int)(255*fade),196,187,197));
         }
         else
         {
@@ -151,7 +151,7 @@ public sealed partial class GamePanel
             float fade=SmoothUnit(age/8)*(1-SmoothUnit((age-108)/24));
             if(fade<=0)return;
             // A stable red subtitle stays readable while the world jolts.
-            Label(g,"소멸해 버려!!!!!!!!!",new(60,549,880,46),30,Color.FromArgb((int)(255*fade),255,48,69));
+            Label(g,"이유가 뭐냐고!!!!!!!!!!!!!!",new(60,549,880,46),30,Color.FromArgb((int)(255*fade),255,48,69));
         }
     }
     private void DisposeRodianLastVowMotion()

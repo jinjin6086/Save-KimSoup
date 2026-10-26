@@ -31,7 +31,7 @@ public sealed class GameForm : Form
 
     public GameForm()
     {
-        Text = "승쿠런 1.15 버전";
+        Text = "승쿠런 1.16 버전";
         ClientSize = new Size(BaseWidth, BaseHeight);
         MinimumSize = new Size(900, 540);
         FormBorderStyle = FormBorderStyle.None;
@@ -170,7 +170,8 @@ public enum GameState
     Ending,
     GameOver,
     PracticeSelect,
-    FinalBossSelect
+    FinalBossSelect,
+    StoryScene
 }
 
 public enum AugmentType
@@ -452,6 +453,7 @@ public sealed partial class GamePanel : Panel
         if(!CinderBurning)audio.StopCinderFire();
         UpdateRodianBackgroundMusic();
         if (gamePaused) { audio.Collect(); return; }
+        if(state==GameState.StoryScene){UpdateStoryJourney(step);audio.Collect();return;}
         if(state==GameState.Ending){sceneFadeTimer=Math.Max(0,sceneFadeTimer-step);UpdateRescueEnding(step);UpdatePolish(step);return;}
         if(state==GameState.FinalBossSelect){UpdateFinalBossChoice(step);UpdatePolish(step);audio.Collect();return;}
         if(UpdateEncounterFlow(step))return;
@@ -564,6 +566,7 @@ public sealed partial class GamePanel : Panel
 
     private void StartRound(int newRound)
     {
+        ResetStoryJourney();storyDefeatDone=false;
         PrepareCheckpoint();
         state = GameState.Round;
         audio.CancelLaserCharge();
@@ -661,7 +664,7 @@ public sealed partial class GamePanel : Panel
     {
         if (frame >= 1080)
         {
-            BeginRoundTransition(2, false);
+            BeginFirstGateStory();
             return;
         }
 
@@ -1193,17 +1196,15 @@ public sealed partial class GamePanel : Panel
         roundTransitionTimer += step;
         if (roundTransitionTimer >= RoundTransitionTotalFrames)
         {
-            if(round==4&&transitionNextRound==5&&!practiceActive){OpenFinalBossChoice();return;}
+            if(round==4&&transitionNextRound==5&&!practiceActive){BeginStageTravel(0);return;}
             if (transitionNextRound >= 2 && transitionNextRound <= 5)
             {
                 if(pendingDraft>0){OpenSkillCards();return;}
-                StartRound(transitionNextRound);
-                sceneFadeTimer = SceneFadeFrames;
+                BeginStageTravel(transitionNextRound);
             }
             else
             {
-                BeginRescueEnding();
-                sceneFadeTimer = SceneFadeFrames;
+                BeginStageTravel(-1);
                 roundTransitionTimer = 0;
             }
         }
@@ -1355,15 +1356,16 @@ public sealed partial class GamePanel : Panel
         lifeStealPercent = 0.05f;
         ResetPremiumRun();ResetFinalBossRun();
         parryRangeBonus = 0f;
-        StartRound(1);
+        BeginOpeningStory();
         Invalidate();
     }
 
     public void HandleKeyDown(KeyEventArgs e)
     {
         if (!heldKeys.Add(e.KeyCode)) return;
+        if(state==GameState.StoryScene&&e.KeyCode is not(Keys.Escape or Keys.M or Keys.P)){if(!gamePaused)HandleStoryJourneyKey(e.KeyCode);return;}
         if(HandlePracticeKey(e.KeyCode))return;
-        if (e.KeyCode == Keys.P && (state==GameState.Round || state==GameState.RoundTransition)) { SetPaused(!gamePaused); return; }
+        if (e.KeyCode == Keys.P && (state==GameState.Round || state==GameState.RoundTransition || state==GameState.StoryScene)) { SetPaused(!gamePaused); return; }
         if (e.KeyCode == Keys.M) { audio.Toggle(); return; }
         if (e.KeyCode == Keys.F) { reducedEffects = !reducedEffects; return; }
         if (e.KeyCode == Keys.R && state == GameState.GameOver) { RetryRound(); return; }
@@ -1437,6 +1439,7 @@ public sealed partial class GamePanel : Panel
         int x = (int)((e.X - (Width-W*scale)/2) / scale);
         int y = (int)((e.Y - (Height-H*scale)/2) / scale);
 
+        if(state==GameState.StoryScene){HandleStoryJourneyKey(Keys.Enter);return;}
         if(state==GameState.FinalBossSelect){HandleFinalBossChoiceMouse(x,y);return;}
 
         if(state==GameState.Title&&new Rectangle(423,406,160,57).Contains(x,y)){OpenPractice();return;}
@@ -1551,7 +1554,7 @@ public sealed partial class GamePanel : Panel
         if (disposing)
         {
             DisposeGpuPrototype();
-            DisposeTrueStopSurfaces();DisposePurgaeAnimation();DisposeLaserBloom();DisposeHighFidelityAuras();DisposeSkillSpectacle();DisposeEncounterFlow();DisposeKickCombat();DisposeRescueEnding();DisposeSoulsInterface();
+            DisposeTrueStopSurfaces();DisposePurgaeAnimation();DisposeLaserBloom();DisposeHighFidelityAuras();DisposeSkillSpectacle();DisposeEncounterFlow();DisposeKickCombat();DisposeRescueEnding();DisposeJourneyResources();DisposeSoulsInterface();
             DisposeArena();
             DisposePremium();
             audio.Dispose();
@@ -1621,10 +1624,13 @@ public sealed partial class GamePanel : Panel
         var mirrorState=g.Save();
         worldMirroring=GravityMirrored&&state==GameState.Round&&!PhaseIntroActive&&!bossBriefingActive&&!IsangjinClockActive;
         if(worldMirroring){g.TranslateTransform(0,H);g.ScaleTransform(1,-1);}
-        if(!MelodyLastStandActive)DrawBackground(g);
+        if(!MelodyLastStandActive&&state!=GameState.StoryScene)DrawBackground(g);
 
         switch (state)
         {
+            case GameState.StoryScene:
+                DrawStoryJourney(g);
+                break;
             case GameState.Title:
                 DrawModernTitle(g);
                 break;

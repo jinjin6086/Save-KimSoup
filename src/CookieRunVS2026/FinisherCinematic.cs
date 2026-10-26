@@ -58,8 +58,9 @@ public sealed partial class GamePanel
     {
         if(round==4){DrawRodianExplosionFinisher(g);return;}
         float t=bossDefeatClock,zoom=FinisherEase(18,53,t);
-        DrawArenaGround(g);DrawPlayer(g);
+        DrawArenaGround(g);if(t<168)DrawPlayer(g);
         using(var shade=new SolidBrush(Color.FromArgb((int)(102+111*zoom),3,4,7)))g.FillRectangle(shade,0,0,W,H);
+        if(t>=168)DrawJourneyActor(g,px+FinisherEase(168,240,t)*310,GroundY,PlayerHeight,true,1,t);
         float size=155+66*zoom,x=defeatX+(641-defeatX)*zoom,y=defeatY+(191-defeatY)*zoom;
         if(round is 2 or 3)DrawIndependentBossExplosion(g,x,y,size,t);
         DrawFinisherImpact(g,x+size*.52f,y+size*.50f,t);

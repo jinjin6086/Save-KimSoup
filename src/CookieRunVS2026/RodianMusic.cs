@@ -14,7 +14,7 @@ public sealed partial class GamePanel
         }
         bool hope=MelodyLastStandActive&&lastStandPhase is 8 or 9 or 4 or 5;
         bool dark=MelodyLastStandActive&&!hope;
-        int musicRound=state==GameState.Ending?1:state==GameState.Round?
+        int musicRound=state==GameState.StoryScene?JourneyMusicKey:state==GameState.Ending?1:state==GameState.Round?
             (dark?10:rodian?12:round==3?13:round==5?(FinalBossKind==0?13:FinalBossKind==1?3:4):round):0;
         // The final chorus begins after the monologue and stays through the
         // successful explosion. Other rounds and optional bosses keep their score.

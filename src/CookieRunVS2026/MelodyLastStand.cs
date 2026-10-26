@@ -2,10 +2,12 @@ using System.Drawing.Drawing2D;
 namespace CookieRunVS2026;
 public sealed partial class GamePanel
 {
-    private const int LastStandTarget=50;
+    private const int LastStandTarget=70;
     private const float LastStandClashZoom=2.05f;
     private const float LastStandLimit=600,LastStandMinimum=600;
-    private const float LastStandMemoryFrames=300,LastStandGatherFrames=210,LastStandIgniteFrames=36,LastStandFinishFrames=FinaleTiming.Finish;
+    // Four document lines need eight seconds to read. The ten-second input
+    // window and every cue relative to the hopeful music remain unchanged.
+    private const float LastStandMemoryFrames=480,LastStandGatherFrames=210,LastStandIgniteFrames=36,LastStandFinishFrames=FinaleTiming.Finish;
     // Despair -> rage -> charge -> rush -> remembered promise -> gather -> ignition -> ten-second
     // clash -> overpower. Clocks are real simulation frames, independent of slow.
     private int lastStandPhase,lastStandPresses,lastStandAttempts,lastStandBeat=-1,lastStandSuccessBeat;
@@ -313,8 +315,8 @@ public sealed partial class GamePanel
             DrawEchoFrame(g,endingFriend,new(700,150,145,137),a);
             for(int i=0;i<5;i++)g.DrawLine(ParticlePen(Color.FromArgb(126,150,176),(int)(210*a),3),704+i*32,141,704+i*32,296);
         }
-        string line=t<.36f?"아직 김스프를 구하지 못했어.":t<.72f?"같이 집에 가기로 했잖아.":"여기서 멈출 수는 없어.";
-        float local=t<.36f?t/.36f:t<.72f?(t-.36f)/.36f:(t-.72f)/.28f;
+        string line=t<.25f?"하.. 이젠 한계인가..":t<.5f?"그치만 아직 구하지 못했잖아..":t<.75f?"그깟 돼지가 아니란 말이야..":"내 가족이라고….!";
+        float local=(t*4)%1;
         float fade=Math.Min(1,local*10)*Math.Min(1,(1-local)*10);
         Label(g,line,new(100,547,800,45),t<.72f?23:27,Color.FromArgb((int)(255*fade),229,239,250));
     }
@@ -337,7 +339,7 @@ public sealed partial class GamePanel
         }
         else
         {
-            string line=lastStandPhase switch{1=>"",2=>"",8=>lastStandClock>=24?"아직 끝날 수는 없어!!":"",9=>"",5=>lastStandClock<FinaleTiming.Impact?"밀어붙여!":"",6=>"SPACE  다시 도전",7=>"연습 성공 · TAB 재시작 / ESC 설정",_=>""};
+            string line=lastStandPhase switch{1=>"",2=>"",8=>lastStandClock>=24?"내 가족이라고….!":"",9=>"",5=>lastStandClock<FinaleTiming.Impact?"밀어붙여!":"",6=>"SPACE  다시 도전",7=>"연습 성공 · TAB 재시작 / ESC 설정",_=>""};
             if(line.Length>0)Label(g,line,new(100,552,800,42),lastStandPhase==8?26:21,lastStandPhase==1?ClashPink:Paper);
             if(lastStandPhase==8||lastStandPhase==9)Label(g,"곧 SPACE 연타",new(695,15,275,27),13,Color.FromArgb(146,188,223));
         }

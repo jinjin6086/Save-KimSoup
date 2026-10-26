@@ -18,7 +18,7 @@ public sealed partial class GamePanel
     public void PauseForFocusLoss()
     {
         ReleaseInputs();
-        if(state==GameState.Round||state==GameState.RoundTransition)SetPaused(true);
+        if(state==GameState.Round||state==GameState.RoundTransition||state==GameState.StoryScene)SetPaused(true);
     }
 
     private void SetPaused(bool paused)

@@ -35,7 +35,7 @@ public sealed partial class GamePanel
             new BriefingRule("음표는 발차기로 반사","대사를 외우는 동안에도 음표가 계속 날아옵니다.","SPACE",BriefingReflect),
             new BriefingRule("탈·덕·안·돼! 마지막 박자 반사","마지막 ‘돼!’에 맞춰 발차기하면 레이저를 반사합니다.","돼!",BriefingReflect),
             new BriefingRule("빨간 직선 돌진은 반사 불가","경고선을 보고 점프·슬라이드로 회피. 피해 1,000.","↑ / ↓",BriefingEvade),
-            new BriefingRule("체력 1 미만이면 최후발악","슬로우 레이저 뒤 SPACE 연타. 10초 안에 50회로 반격.","SPACE",BriefingReflect)},
+            new BriefingRule("체력 1 미만이면 최후발악","슬로우 레이저 뒤 SPACE 연타. 10초 안에 70회로 반격.","SPACE",BriefingReflect)},
         5=>CreateFinalBriefingRules(),
         _=>new[]{
             new BriefingRule("바닥 장애물","위쪽 방향키로 뛰어넘으세요.","↑",BriefingMove),

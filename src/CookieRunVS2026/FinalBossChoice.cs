@@ -24,7 +24,7 @@ public sealed partial class GamePanel
         if(choice==0)
         {
             // Random selection happens only after accepting the extra fight.
-            ChooseFinalBoss();StartRound(5);sceneFadeTimer=SceneFadeFrames;
+            ChooseFinalBoss();BeginStageTravel(5);
         }
         else
         {

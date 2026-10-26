@@ -5,7 +5,7 @@ namespace CookieRunVS2026;
 
 public sealed partial class GamePanel
 {
-    private readonly record struct BossConversationLine(bool Boss, string Text);
+    private readonly record struct BossConversationLine(bool Boss, string Text, int Tone=0);
     // 0: arrive/recognize; 1: conversation; 3: mandatory mechanics; 2: dissolve.
     private int bossTalkPhase, bossTalkLine, bossTalkPhaseKind, bossEntranceFoot = -1;
     private float bossTalkClock, bossTalkInputLock;
@@ -32,7 +32,9 @@ public sealed partial class GamePanel
         2 => Color.FromArgb(171,194,206),3=>Color.FromArgb(215,133,92),
         4=>Color.FromArgb(224,153,185),_=>FinalBossAccent
     };
-    private BossConversationLine[] BossConversationLines => bossTalkIsPhase
+    private BossConversationLine[] BossConversationLines => storyDefeatTalk
+        ? round==2?IsangjinDepartureConversation:PurgaeDepartureConversation
+        : bossTalkIsPhase
         ? bossTalkPhaseKind==1?PurgaeRageConversation:RodianMenheraConversation
         : briefingRound switch
         {
@@ -41,38 +43,36 @@ public sealed partial class GamePanel
         };
     private static readonly BossConversationLine[] PurgaeRageConversation =
     {
-        new(true,"이 정도로 날 꺾을 수 있을 줄 알았나?"),
-        new(false,"모습이 바뀌었네. 그래도 길은 안 비켜 주겠지?"),
-        new(true,"이제 네가 버틸 차례다. 전부 태워 주마!"),
-        new(false,"끝까지 해 보자. 난 돌아가야 하니까.")
+        new(true,"하.. 정말 귀찮게 구는군..",1),
+        new(false,"이젠 변신까지 하네.. 하.. 내 돼지.. 살아는 있는거냐?"),
+        new(true,"그래.. 저 깊은 지하에 신선하게 살려놨지.."),
+        new(false,"그래?"),new(false,"이제 진짜 끝내줄께")
     };
     private static readonly BossConversationLine[] RodianMenheraConversation =
     {
-        new(true,"왜 자꾸 돌아가겠다는 거야… 내가 그렇게 싫어?"),
-        new(false,"널 미워해서가 아니야. 김스프가 기다리고 있어."),
-        new(true,"가질 수 없다면 부숴버리겠어.."),
-        new(false,"그래도 난 갈 거야. 이제 그만 비켜.")
+        new(true,"왜…"),new(true,"왜!!!!",2),new(false,"(속으로) 어우 쏏"),
+        new(true,"왜 내 공연을 보려고 하지 않는거야??!? 그깟 돼지가 내 공연보다 가치있다는 거야????",1),
+        new(false,"당연하지."),new(true,"...."),new(true,"가질 수 없다면.."),
+        new(true,"부서버리겠어!!!",2)
     };
     private static readonly BossConversationLine[] IsangjinConversation =
     {
-        new(true, "멈춰. 여긴 네가 들어올 곳이 아니야."),
-        new(false, "김스프를 데리러 왔어. 어디에 있어?"),
-        new(true, "그 문을 열고 싶다면, 먼저 나부터 넘어야 할 거다."),
-        new(false, "그럼 비켜. 내가 직접 데려갈게.")
+        new(true,"어제 훔친 돼지를 닮았군.. 아빠인가??"),new(false,"뭣."),
+        new(false,"헛소리 하지말고 김스프의 위치나 말해라.. 죽기 싫으면"),
+        new(true,"그래.."),new(true,"싫은데ㅋ"),new(false,"그럼 뭐 말할 때까지 패면 되겠네")
     };
     private static readonly BossConversationLine[] PurgaeConversation =
     {
-        new(true, "여기까지 온 건 제법이군. 하지만 더는 못 간다."),
-        new(false, "길 막지 마. 기다리는 사람이 있어."),
-        new(true, "이 돌도, 불도 전부 네가 감당할 수 있겠나?"),
-        new(false, "던져 봐. 전부 돌려줄 테니까.")
+        new(true,"뭐냐 이 인간은.."),new(false,"내 돼지 내놔"),new(true,"내 양분이 될 가축을 네게?"),
+        new(false,"뭔.. 개소리야.."),new(true,"그 돼지는 곧 내 힘을 되찾을 양분으로 쓰일 뿐이다.."),
+        new(true,"하찮은 인간 주제에 꺼져라.."),new(false,"넌 나를 화나게 했다.")
     };
     private static readonly BossConversationLine[] RodianConversation =
     {
-        new(true, "왔구나. 이제 내 노래를 들어 줄 거지?"),
-        new(false, "미안. 김스프를 데리고 돌아가야 해."),
-        new(true, "또 떠난다고? …아직 내 공연은 안 끝났어."),
-        new(false, "이제 그만해. 나도 여기서 멈출 수 없어.")
+        new(true,"풀어줘서.. 너가 내 남편을 죽였구나??",3),
+        new(false,"사모님.. 왜 갇혀있는지는 모르겠는데 그 좀 비켜 주실래요??"),
+        new(true,"...안돼.. 넌 내 공연의 영원한 청중이 되는거야…^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",3),
+        new(false,"이건 진짜 위험한데..")
     };
     private static readonly BossConversationLine[] TruePurgaeConversation =
     {
@@ -136,7 +136,7 @@ public sealed partial class GamePanel
         bossTalkDepartureFrame?.Dispose();bossTalkDepartureFrame=null;
         bossTalkPhase=bossTalkLine=bossTalkPhaseKind=0;bossEntranceFoot=-1;
         bossTalkClock=bossTalkInputLock=0;
-        bossTalkRevealed=bossTalkHelp=bossTalkIsPhase=false;
+        bossTalkRevealed=bossTalkHelp=bossTalkIsPhase=false;storyDefeatTalk=false;
     }
     private void BeginBossConversation()=>ResetBossConversation();
     private void BeginPhaseConversation(int kind)
@@ -169,6 +169,7 @@ public sealed partial class GamePanel
             bossBriefingActive=false;sliding=false;audio.StopSliding();slideSoundActive=false;
             sceneFadeTimer=0;parryWindow=0;
             if(!bossTalkIsPhase)warningTimer=0;
+            if(storyDefeatTalk){storyDefeatTalk=false;storyDefeatDone=true;BeginBossDefeat();return;}
             bossTalkDepartureFrame?.Dispose();bossTalkDepartureFrame=null;
         }
     }
@@ -202,17 +203,33 @@ public sealed partial class GamePanel
         {bossTalkLine++;bossTalkClock=0;bossTalkRevealed=false;}
         else
         {
-            bossTalkPhase=bossTalkIsPhase?2:3;bossTalkClock=0;audio.Play("select");
+            bossTalkPhase=bossTalkIsPhase||storyDefeatTalk?2:3;bossTalkClock=0;audio.Play("select");
         }
         return true;
     }
     // Ending and boss conversations share this panel, including the rounded face.
-    private void DrawStoryDialogue(Graphics g,string speaker,string text,int visible,string hint,bool showCue,float clock)
+    private void DrawStoryDialogue(Graphics g,string speaker,string text,int visible,string hint,bool showCue,float clock, int tone=0)
     {
         StoryLabel(g,speaker,new(65,455,820,28),18,Color.FromArgb(221,183,122));
-        using var body=new SolidBrush(Color.FromArgb(238,227,207));
-        g.DrawString(text[..Math.Clamp(visible,0,text.Length)],StoryFont(21),body,
+        using var body=new SolidBrush(tone is 1 or 2?Color.FromArgb(255,91,94):tone==3?Color.FromArgb(255,173,215):Color.FromArgb(238,227,207));
+        string shown=text[..Math.Clamp(visible,0,text.Length)];
+        if(shown.Length>0&&char.IsHighSurrogate(shown[^1]))shown=shown[..^1];
+        int crying=shown.IndexOf("😭",StringComparison.Ordinal);
+        string bodyText=crying<0?shown:shown[..crying];
+        g.DrawString(bodyText,StoryFont(tone==2?27:21),body,
             new RectangleF(65,493,850,65),endingDialogueFormat);
+        if(crying>=0)
+        {
+            // Jua has no emoji glyph. Draw a tiny crying emote here instead of
+            // shipping a missing-character box or changing the approved font.
+            float x=65+g.MeasureString(bodyText,StoryFont(21),850).Width,y=505;
+            using var face=new SolidBrush(Color.FromArgb(242,202,101));g.FillEllipse(face,x,y-10,21,21);
+            using var ink=new Pen(Color.FromArgb(107,69,31),1.5f){StartCap=LineCap.Round,EndCap=LineCap.Round};
+            g.DrawArc(ink,x+3,y-5,5,4,180,150);g.DrawArc(ink,x+13,y-5,5,4,210,150);
+            g.DrawEllipse(ink,x+8,y+2,5,6);
+            using var tears=new Pen(Color.FromArgb(115,192,227),3){StartCap=LineCap.Round,EndCap=LineCap.Round};
+            g.DrawLine(tears,x+5,y,x+5,y+9);g.DrawLine(tears,x+16,y,x+16,y+9);
+        }
         StoryLabel(g,hint,new(652,563,282,23),12,Color.FromArgb(145,130,110),true);
         if(showCue&&MathF.Sin(clock*.065f)>-.3f)
         {
@@ -286,7 +303,7 @@ public sealed partial class GamePanel
         var target=new RectangleF(587+20*(1-fade),76-breath,330,330);
         Image? image=briefingRound switch
         {
-            2=>enemy4,3=>PurgaePoseImage(bossTalkIsPhase&&bossTalkPhaseKind==1?1:0,0),
+            2=>enemy4,3=>PurgaePoseImage((bossTalkIsPhase&&bossTalkPhaseKind==1)||(storyDefeatTalk&&purgaeTransformed)?1:0,0),
             4=>bossTalkIsPhase?(storyRodianMenheraPortrait??melodyMenhera??melodyAngry??enemy5):(storyRodianPortrait??enemy5),_=>null
         };
         if(briefingRound==4&&image!=null&&(image==storyRodianPortrait||image==storyRodianMenheraPortrait))
@@ -305,14 +322,16 @@ public sealed partial class GamePanel
         {g.FillRectangle(bar,0,0,W,57);g.FillRectangle(bar,0,439,W,161);}
         using(var line=new Pen(Color.FromArgb(80,202,171,119),.8f))
         {g.DrawLine(line,48,57,952,57);g.DrawLine(line,48,439,952,439);}
-        StoryLabel(g,bossTalkIsPhase?(bossTalkPhaseKind==1?"광폭화":"멘헤라"):$"라운드 {briefingRound}",new(48,14,152,27),15,Gold);
+        StoryLabel(g,storyDefeatTalk?"마지막 대화":bossTalkIsPhase?(bossTalkPhaseKind==1?"광폭화":"멘헤라"):$"라운드 {briefingRound}",new(48,14,152,27),15,Gold);
         StoryLabel(g,BriefingBossName,new(280,11,440,33),23,Color.FromArgb(237,220,187),true);
-        if(!bossTalkIsPhase)StoryLabel(g,"대화 후 기믹 안내",new(792,16,160,22),12,Steel,true);
+        if(!bossTalkIsPhase&&!storyDefeatTalk)StoryLabel(g,"대화 후 기믹 안내",new(792,16,160,22),12,Steel,true);
         int visible=bossTalkPhase==2?spoken.Text.Length:BossConversationVisible;
         bool ready=visible>=spoken.Text.Length;
         string hint=!ready?"ENTER / SPACE   문장 보기":bossTalkLine==BossConversationLines.Length-1
-            ?bossTalkIsPhase?"ENTER / SPACE   전투 계속":"ENTER / SPACE   보스 설명":"ENTER / SPACE   다음";
-        DrawStoryDialogue(g,spoken.Boss?BriefingBossName:"나",spoken.Text,visible,hint,ready,briefingClock);
+            ?storyDefeatTalk?"ENTER / SPACE   다음":bossTalkIsPhase?"ENTER / SPACE   전투 계속":"ENTER / SPACE   보스 설명":"ENTER / SPACE   다음";
+        string storyBossName=briefingRound==3&&(storyDefeatTalk&&purgaeTransformed||bossTalkIsPhase&&bossTalkPhaseKind==1)?"광폭화 파괴옥":
+            briefingRound==4&&bossTalkIsPhase?"멘헤라 강로디언":BriefingBossName;
+        DrawStoryDialogue(g,spoken.Boss?storyBossName:"나",spoken.Text,visible,hint,ready,briefingClock,spoken.Tone);
         g.Restore(saved);
     }
 }

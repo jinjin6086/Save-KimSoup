@@ -6,7 +6,7 @@ namespace CookieRunVS2026;
 public sealed partial class GamePanel
 {
     private bool bossBriefingActive,bossDefeatActive;
-    private int briefingRound;
+    private int briefingRound,storyDepartureFoot=-1;
     private float briefingClock,bossDefeatClock;
     private Bitmap? defeatPortrait;
     private float defeatX,defeatY;
@@ -39,6 +39,11 @@ public sealed partial class GamePanel
         }
         if(!bossDefeatActive)return false;
         bossDefeatClock+=step;audio.Collect();
+        if(round is 2 or 3&&bossDefeatClock>=168)
+        {
+            int foot=(int)((bossDefeatClock-168)/18);
+            if(foot!=storyDepartureFoot){storyDepartureFoot=foot;if(audio.ActiveVoices<6)audio.Play($"step{(round==2?1:2)}{foot%2}");}
+        }
         if(round is 2 or 3 && !independentBossExplosionPlayed && bossDefeatClock>=IndependentBossExplosionFrame){independentBossExplosionPlayed=true;audio.Play(round==2?"bossburst2":"bossburst3");}
         if(round==4&&!lastStandResolved&&!rodianDefeatExplosionPlayed&&bossDefeatClock>=RodianExplosionFrame)
         {
@@ -67,7 +72,9 @@ public sealed partial class GamePanel
     }
     private void BeginBossDefeat()
     {
-        if(bossDefeatActive)return;CancelCinderFlight();
+        if(bossDefeatActive||storyDefeatTalk)return;
+        if(!practiceActive&&round is 2 or 3&&!storyDefeatDone){BeginStoryDefeatTalk();return;}
+        CancelCinderFlight();
         defeatPortrait?.Dispose();defeatPortrait=new Bitmap(288,288,PixelFormat.Format32bppPArgb);
         using(var capture=Graphics.FromImage(defeatPortrait))
         {
@@ -82,7 +89,7 @@ public sealed partial class GamePanel
         defeatX=bossX;defeatY=bossY;
         PrepareFinisherPortraits();
         BeginRoundTransition(round<5?round+1:0,true,round!=4);
-        bossDefeatActive=true;bossDefeatClock=0;independentBossExplosionPlayed=false;rodianDefeatExplosionPlayed=round==4&&lastStandResolved;
+        bossDefeatActive=true;bossDefeatClock=0;storyDepartureFoot=-1;independentBossExplosionPlayed=false;rodianDefeatExplosionPlayed=round==4&&lastStandResolved;
         if(round==4)ResetRodianDeparture();
         burnTimer=0;parryWindow=0;counterFxTimer=0;ReleaseInputs();
         if(round!=4||!lastStandResolved)audio.Play("bossdefeat");

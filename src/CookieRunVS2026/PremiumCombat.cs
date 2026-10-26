@@ -122,7 +122,7 @@ public sealed partial class GamePanel
     private void FinishSkillChoice()
     {
         if(selectedCard<0||cardReveal<24)return;
-        int next=transitionNextRound;pendingDraft=0;StartRound(next);sceneFadeTimer=24;
+        int next=transitionNextRound;pendingDraft=0;BeginStageTravel(next);
     }
     private void HandleSkillChoiceKey(Keys key)
     {

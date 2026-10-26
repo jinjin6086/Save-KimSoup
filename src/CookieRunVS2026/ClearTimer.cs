@@ -8,7 +8,7 @@ public sealed partial class GamePanel
     private void AdvanceClearTimer(double seconds)
     {
         if(seconds<=0||!double.IsFinite(seconds)||gamePaused||practiceActive||state!=GameState.Round)return;
-        if(bossBriefingActive||bossDefeatActive||PhaseIntroActive||sceneFadeTimer>0||TruePurgaeTimeFrozen)return;
+        if(storyDefeatTalk||bossBriefingActive||bossDefeatActive||PhaseIntroActive||sceneFadeTimer>0||TruePurgaeTimeFrozen)return;
         if(MelodyLastStandActive&&lastStandPhase!=4)return;
         if(IsangjinClockActive&&isangjinClockPhase!=4)return;
         if(round==4&&menheraIntro>0)return;

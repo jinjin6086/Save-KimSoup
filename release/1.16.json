@@ -1,0 +1,25 @@
+{
+  "sequence": 16,
+  "version": "1.16",
+  "file": "승쿠런 1.16 버전.zip",
+  "source": "src/CookieRunVS2026",
+  "sha256": "de3fd5c26c8c726bdfbdd4d52667ab8d899e0d22e1a0f9d54edb5a6bb1d9377e",
+  "exe_sha256": "1eec4d70ada496e72eb4d58bf0779ebdfa5159d2587953a14679a37f653013e7",
+  "bytes": 313754432,
+  "note": "김스프 납치·기상·쪽지·출발 오프닝, 라운드별 장소 입장, PDF 보스/변신/처치/QTE/엔딩 대사. QTE 10초70회. 최신 리듬 리메이크 BGM과 기존 전투·GPU·보상·선택형 종결보스 유지.",
+  "unchanged_asset_entries": 77,
+  "all_entries_crc_checked": true,
+  "old_release_preserved": true,
+  "automatic_checks": 98,
+  "date": "2026-10-27",
+  "platform": "Windows x64",
+  "self_contained": true,
+  "qte_required_presses": 70,
+  "qte_seconds": 10,
+  "verification": {
+    "build_errors": 0,
+    "build_warnings": 0,
+    "automated_checks_passed": 98,
+    "manual_gameplay_and_audio_review": false
+  }
+}

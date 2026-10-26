@@ -19,7 +19,7 @@ public sealed partial class GamePanel
         else{forgeLevel=0;forgeFailures++;forgeMessage=forgeFailures>=3?"실패 3회 · 강화 종료. E로 출전하세요":"실패 · 세 효과가 기본 수치로 초기화됩니다";audio.Play("crash");}
         ApplyForgeLevel();
     }
-    private void FinishForge(){if(forgeLock>0)return;ApplyForgeLevel();pendingDraft=0;StartRound(4);sceneFadeTimer=24;}
+    private void FinishForge(){if(forgeLock>0)return;ApplyForgeLevel();pendingDraft=0;BeginStageTravel(4);}
     private void HandleForgeKey(Keys key){if(key==Keys.Space||key==Keys.Enter)RollForge();if(key==Keys.E)FinishForge();}
     private void HandleForgeMouse(int x,int y){if(forgeRollRect.Contains(x,y))RollForge();else if(forgeLeaveRect.Contains(x,y))FinishForge();}
     private void DrawForge(Graphics g)=>DrawSoulsForge(g);

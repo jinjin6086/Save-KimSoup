@@ -18,19 +18,17 @@ public sealed partial class GamePanel
         Alignment=StringAlignment.Near,LineAlignment=StringAlignment.Near,
         Trimming=StringTrimming.None,FormatFlags=StringFormatFlags.LineLimit
     };
-    private static readonly string[,] EndingSpeakers=
+    private static readonly string[][] EndingSpeakers=
     {
-        {"김스프","나"},
-        {"김스프","나"},
-        {"김스프","나"},
-        {"김스프","나"}
+        new[]{"김스프","나","김스프","나"},new[]{"김스프","나"},
+        new[]{"김스프","나"},new[]{"김스프","나","김스프"}
     };
-    private static readonly string[,] EndingWords=
+    private static readonly string[][] EndingWords=
     {
-        {"와 줬구나.\n여기서 못 나가는 줄 알았어.","늦어서 미안해. 이제 괜찮아.\n같이 집에 가자."},
-        {"고마워. 네가 와 줄 줄 알았어.\n그런데 이제 좀 배고프다.","나도 배고파.\n집에 가서 스프 끓여 먹자."},
-        {"당근은 내가 썰게.\n감자는 너한테 맡길게.","좋아. 다 넣고 같이 끓이자.\n곧 먹을 수 있겠어."},
-        {"정말 맛있다.\n이렇게 같이 먹으니까 더 좋네.","앞으로도 같이 먹자.\n많이 먹어."}
+        new[]{"아 예?? 이걸 구하러 왔다고?? 줴줴이야~","ㅋ.. 말투 여전한거 보니 험한짓은 안 당했나보네","아뇨아뇨아뇨… ㅈㄴ 배고파요..","그래.. 집에 가자"},
+        new[]{"님아 요리 빨리하셈;;","너까지 넣는다?"},
+        new[]{"엄.","ㅈㅅ"},
+        new[]{"개 맛있음의 눈물 😭","그래 많이 먹어라 임마","꿀!"}
     };
     private static readonly string[] EndingChapterNames={"김스프 구출","집으로 가는 길","저녁 준비","함께하는 저녁"};
 
@@ -123,15 +121,15 @@ public sealed partial class GamePanel
             state=GameState.Title;ReleaseInputs();return true;
         }
         int count=EndingVisibleCharacters;
-        if(count<EndingWords[endingScene,endingLine].Length)
+        if(count<EndingWords[endingScene][endingLine].Length)
         {
             endingTextRevealed=true;return true;
         }
-        if(endingLine==0)
+        if(endingLine+1<EndingWords[endingScene].Length)
         {
             // Showing the text early must not skip the locked cell or the opening door.
             if(endingScene==0&&endingSceneClock<210)return true;
-            endingLine=1;endingLineClock=0;endingTextRevealed=false;return true;
+            endingLine++;endingLineClock=0;endingTextRevealed=false;return true;
         }
         if(!EndingRescueComplete)return true;
         if(endingScene<3)
@@ -146,8 +144,8 @@ public sealed partial class GamePanel
         return HandleEndingKey(Keys.Enter);
     }
 
-    private int EndingVisibleCharacters=>endingTextRevealed?EndingWords[endingScene,endingLine].Length:
-        Math.Clamp((int)((endingLineClock-12)/1.8f),0,EndingWords[endingScene,endingLine].Length);
+    private int EndingVisibleCharacters=>endingTextRevealed?EndingWords[endingScene][endingLine].Length:
+        Math.Clamp((int)((endingLineClock-12)/1.8f),0,EndingWords[endingScene][endingLine].Length);
 
     private void DrawRescueEnding(Graphics g)
     {
@@ -497,11 +495,11 @@ public sealed partial class GamePanel
 
     private void DrawEndingDialogue(Graphics g)
     {
-        string text=EndingWords[endingScene,endingLine];int visible=EndingVisibleCharacters;
+        string text=EndingWords[endingScene][endingLine];int visible=EndingVisibleCharacters;
         bool ready=visible>=text.Length;
         bool waitingForRescue=endingScene==0&&(endingLine==0?endingSceneClock<210:!EndingRescueComplete);
         string hint=waitingForRescue&&ready?"문을 여는 중...":ready?"ENTER / SPACE   다음":"ENTER / SPACE   문장 보기";
-        DrawStoryDialogue(g,EndingSpeakers[endingScene,endingLine],text,visible,hint,ready&&!waitingForRescue,endingSceneClock);
+        DrawStoryDialogue(g,EndingSpeakers[endingScene][endingLine],text,visible,hint,ready&&!waitingForRescue,endingSceneClock);
     }
 
     private void DrawEndingFinalCard(Graphics g)
