@@ -1,0 +1,25 @@
+{
+  "sequence": 17,
+  "version": "1.17",
+  "file": "승쿠런 1.17 버전.zip",
+  "source": "encore-balance-release-20261028",
+  "sha256": "fee9f456ec6386c30be71a62c93b82fa5240507655508d7dd0aa887c119bfc54",
+  "exe_sha256": "1307437604df38d25f4ffa16ce77a3275398cb5a1cf4197f436c848db83f4f70",
+  "bytes": 330305479,
+  "note": "HD 로비·이동·기상·대사음, QTE 거리·고도·독백·성악 음악, 일반 레이저1/3, 보스HP25/30/40, 문워크 반사·드레인키스·무승부50%회복·클론150%·패시브공백삭제. 최신 미리보기 전부 포함.",
+  "date": "2026-10-28",
+  "platform": "Windows x64",
+  "self_contained": true,
+  "source_path": "src/CookieRunVS2026",
+  "qte_required_presses": 70,
+  "qte_seconds": 10,
+  "verified_asset_count": 92,
+  "old_release_preserved": true,
+  "zip_crc_and_hashes_verified": true,
+  "verification": {
+    "automated_checks_passed": 144,
+    "gpu_capture_verified": true,
+    "full_manual_playtest": false,
+    "subjective_listening": false
+  }
+}

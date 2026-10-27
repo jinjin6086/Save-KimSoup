@@ -53,8 +53,8 @@ public sealed partial class GamePanel
         g.DrawImage(source,new Rectangle(0,0,source.Width,source.Height),0,0,source.Width,source.Height,GraphicsUnit.Pixel,attributes);
         return previewClone;
     }
-    private static readonly string[] ActivePreviewCaptions={"","흡수 → 스파크 볼","공격을 스쳐 회피","장애물 → 체력 회복","적만 느려집니다","반사 → 유령 옆차기","불 쿠나이 → 취약"};
-    private static readonly string[] PassivePreviewCaptions={"","5회 반사 → 흡혈","위기 → 전부 회복","쓰러지면 초록 클론","정확한 반사 → 잔향","","반사 → Q 대기 −1초"};
+    private static readonly string[] ActivePreviewCaptions={"","흡수 → 스파크 볼","문워크 · 반사 가능","장애물 → 체력 회복","적만 느려집니다","반사 → 유령 옆차기","불 쿠나이 → 취약"};
+    private static readonly string[] PassivePreviewCaptions={"","5회 반사 → 흡혈","위기 → 50% 회복","초록 클론 · 150%","정확한 반사 → 잔향","","반사 → Q 대기 −1초"};
     private void DrawSkillPreview(Graphics g,RectangleF bounds,bool active,int id)
     {
         // Illustrative loops share real game sprites/materials, but never invoke
@@ -76,14 +76,14 @@ public sealed partial class GamePanel
         if(active&&id==2)
         {
             body.X+=MathF.Sin(u*MathF.Tau)*5;
-            PreviewSprite(g,hero,new(body.X-7,body.Y,body.Width,body.Height),.18f);
+            if(moonwalkPoses.Length==6)hero=moonwalkPoses[(int)(clock/7)%6];
         }
         if(!active&&id==3)
         {
             PreviewSprite(g,hero,body,Math.Clamp(1-u*2,0,.75f));
             PreviewSprite(g,PreviewGreenClone(),new(48+u*18,8,39,51),Math.Clamp(u*2,0,1));
         }
-        else PreviewSprite(g,hero,body,active&&id==2?.58f:1);
+        else PreviewSprite(g,hero,body,1);
         if(active&&id==3)
         {
             float x=126-u*61;PreviewSprite(g,enemy2,new(x,29,26*(1-u*.5f),28*(1-u*.5f)),1-u*.6f);
@@ -121,7 +121,8 @@ public sealed partial class GamePanel
         if(!active&&id is 1 or 2)
         {
             if(id==1)for(int i=0;i<5;i++){using var p=new SolidBrush(i<1+(int)(u*5)?tint:Color.FromArgb(40,tint));g.FillEllipse(p,75+i*9,12,4,4);}
-            PreviewRestore(g,91,30,u,tint);
+            PreviewRestore(g,48,30,u,tint);
+            if(id==1)DrawKissHeart(g,114-u*64,25+MathF.Sin(u*MathF.PI)*9,5,MathF.Sin(u*MathF.PI),Color.FromArgb(235,123,178));
         }
         if(!active&&id==6)
         {

@@ -48,7 +48,7 @@ public sealed partial class GamePanel
     }
     private void DrawWolfFinale(Graphics g)
     {
-        var rect=new RectangleF(px-32,py-41,130,120);
+        var rect=new RectangleF(FinalePlayerAnchorX-32,py-41,130,120);
         int pose=lastStandPhase is 9 or 4 or 5?11:lastStandPhase is 8 or 3?9:8;
         DrawWolfPose(g,pose,rect);
     }

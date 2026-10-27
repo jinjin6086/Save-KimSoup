@@ -69,7 +69,7 @@ public sealed partial class GamePanel
     };
     private static readonly BossConversationLine[] RodianConversation =
     {
-        new(true,"풀어줘서.. 너가 내 남편을 죽였구나??",3),
+        new(true,"풀어줘서 고마워... 너가 내 남편을 죽였구나??",3),
         new(false,"사모님.. 왜 갇혀있는지는 모르겠는데 그 좀 비켜 주실래요??"),
         new(true,"...안돼.. 넌 내 공연의 영원한 청중이 되는거야…^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",3),
         new(false,"이건 진짜 위험한데..")

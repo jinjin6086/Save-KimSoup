@@ -18,7 +18,7 @@ internal sealed partial class GameAudio
     {
         // Dialogue, actions, phase changes and finale accents never change gain.
         // The arguments remain API-compatible with the existing scene director.
-        requestedMusic=clash?9:round is 10 or 12 or 13?round:round is >=1 and <=4?round:0;
+        requestedMusic=clash?9:round is 10 or 12 or 13 or 14?round:round is >=1 and <=4?round:0;
         if(requestedMusic==0){StopMusic();return;}
         if(!Muted&&!DeviceUnavailable&&!paused&&musicKey!=requestedMusic)StartMusic(requestedMusic);
     }

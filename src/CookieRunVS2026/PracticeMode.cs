@@ -11,7 +11,7 @@ public sealed partial class GamePanel
     private string PracticeQHelp=>(ActivePower)practiceQ switch
     {
         ActivePower.Absorb=>"4초간 흡수 → Q를 다시 눌러 발사. 발차기도 가능합니다.",
-        ActivePower.Dodge=>"1.8초간 모든 피해 회피. 레이저와 돌진도 통과합니다.",
+        ActivePower.Dodge=>"1.8초간 문워크 회피. 불투명 상태로 발차기도 가능합니다.",
         ActivePower.Eat=>"5초간 닿은 장애물을 먹고 350 회복. 탄환은 먹지 않습니다.",
         ActivePower.Slow=>"4초간 집중. 적 속도 48%, 실제 몸·발차기·공격 판정을 표시합니다.",
         ActivePower.Echo=>"6초간 반사에 유령 옆차기 추가. 0.47초 뒤 피해 0.65.",
@@ -21,8 +21,8 @@ public sealed partial class GamePanel
     private string PracticePassiveHelp=>(PassivePower)practicePassive switch
     {
         PassivePower.Feast=>"5회 반사마다 체력 10% 회복, 보스 피해 1. 메테오는 회복만.",
-        PassivePower.Truce=>"체력 500 미만에서 전부 회복. 보스도 받은 피해의 절반 회복. H로 시험.",
-        PassivePower.Clone=>"사망 직전 초록 클론으로 계승. 체력·공격 절반. J로 시험.",
+        PassivePower.Truce=>"체력 500 미만에서 최대 체력의 50% 회복. H로 시험.",
+        PassivePower.Clone=>"사망 직전 초록 클론으로 계승. 체력 50% · 공격 150%. J로 시험.",
         PassivePower.Precision=>"정확한 반사 3회마다 강한 잔향 옆차기. 메테오는 3% 회복만.",
         PassivePower.Bastion=>"공백",
         PassivePower.Flow=>"반사마다 Q 대기 −1초와 흡기 연출. Q를 먼저 사용해 보세요.",
@@ -58,7 +58,7 @@ public sealed partial class GamePanel
             if(key==Keys.Left)practicePreset=(practicePreset+PracticeNames.Length-1)%PracticeNames.Length;
             if(key==Keys.Right)practicePreset=(practicePreset+1)%PracticeNames.Length;
             if(key==Keys.Q)practiceQ=(practiceQ+1)%(ActivePowerCount+1);
-            if(key==Keys.E){practicePassive=(practicePassive+1)%(PassivePowerCount+1);if(practicePassive==5)practicePassive=6;if(practicePassive==(int)PassivePower.Flow)practiceFreeQ=false;}
+            if(key==Keys.E){practicePassive=practicePassive switch{0=>1,1=>2,2=>3,3=>4,4=>6,_=>0};if(practicePassive==(int)PassivePower.Flow)practiceFreeQ=false;}
             if(key==Keys.D)practiceProtect=!practiceProtect;
             if(key==Keys.C)practiceFreeQ=!practiceFreeQ;
             if(key==Keys.Enter)StartPractice();

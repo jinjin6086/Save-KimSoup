@@ -54,7 +54,7 @@ public sealed partial class GamePanel
     private void ResetPremiumRound()
     {
         CancelMeteorStorm(false);ResetEncore();ResetBattleDirector();ResetRunnerMotion();
-        ResetNewBattle();ResetAbilityExpansionRound();
+        ResetNewBattle();ResetAbilityExpansionRound();ResetRevampedPassives();
         if(passiveSkill==PassivePower.Bastion)passiveSkill=PassivePower.None;
         activeTimer=activeCooldown=skillVisual=cinematicTimer=0;focusEntryTimer=focusExitTimer=0;absorbedCount=passiveParries=0;
         truceUsed=false;dashActive=sparkActive=false;dashCooldown=410;dashTimer=0;
@@ -76,7 +76,7 @@ public sealed partial class GamePanel
     }
     private void UpdatePremiumCombat(float step)
     {
-        UpdateNewBattle(step);
+        UpdateNewBattle(step);UpdateMoonwalkDodge(step);
         UpdateMeteorBarrage(step*AbilityEnemyTimeScale);
         activeCooldown=Math.Max(0,activeCooldown-step);
         if(activeTimer>0)
@@ -145,7 +145,7 @@ public sealed partial class GamePanel
         activeCooldown=activeSkill switch{ActivePower.Absorb=>840,ActivePower.Dodge=>720,ActivePower.Eat=>900,ActivePower.Echo=>1080,_=>960};
         absorbedCount=0;skillVisual=50;
         audio.Play(activeSkill switch{ActivePower.Absorb=>"absorb",ActivePower.Dodge=>"dodge",ActivePower.Slow=>"focusenter",ActivePower.Eat=>"eat",ActivePower.Echo=>"furiosostart",ActivePower.Cinder=>"cinderstart",_=>"charge"});
-        if(activeSkill==ActivePower.Dodge){burnTimer=0;}
+        if(activeSkill==ActivePower.Dodge){burnTimer=0;BeginMoonwalkDodge();}
         if(activeSkill==ActivePower.Slow)BeginHackedFocus();
     }
     private void ReleaseAbsorption()
@@ -177,7 +177,7 @@ public sealed partial class GamePanel
         OnExpandedReflection(parryWindow>=6);
         if(passiveSkill!=PassivePower.Feast)return;
         if(++passiveParries<5)return;passiveParries=0;
-        hp=Math.Min(PlayerMaxHealth,hp+PlayerMaxHealth*.1f);skillVisual=60;
+        hp=Math.Min(PlayerMaxHealth,hp+PlayerMaxHealth*.1f);skillVisual=60;BeginDrainKiss(!meteorParryNoBossDamage);
         if(!meteorParryNoBossDamage){pendingBossDamage=1;RegisterBossParryHit(600,false);}audio.Play("eat");
         augmentNotice=meteorParryNoBossDamage?"폭식  ·  체력 10% 회복":"폭식  ·  보스 체력 흡수 / 체력 10% 회복";augmentFlashTimer=90;
     }
@@ -185,15 +185,15 @@ public sealed partial class GamePanel
     {
         if(hp<500&&passiveSkill==PassivePower.Truce&&!truceUsed)
         {
-            truceUsed=true;bossDamage*=.5f;hp=PlayerMaxHealth;skillVisual=65;audio.Play("reward");
-            augmentNotice="무승부  ·  서로 회복";augmentFlashTimer=120;
+            truceUsed=true;hp=Math.Min(PlayerMaxHealth,hp+PlayerMaxHealth*.5f);skillVisual=65;audio.Play("reward");
+            augmentNotice="무승부  ·  최대 체력의 50% 회복";augmentFlashTimer=120;
         }
         if(hp>0)return true;
         if(passiveSkill==PassivePower.Clone&&!cloneUsed)
         {
             cloneUsed=cloneActive=true;hp=PlayerMaxHealth;hpTrail=hp;invuln=90;burnTimer=0;skillVisual=80;
             Burst(px+26,py+38,Color.FromArgb(101,255,135),60);audio.Play("clone");
-            augmentNotice="클론 등장  ·  최대 체력 50% / 공격력 50%";augmentFlashTimer=140;return true;
+            augmentNotice="클론 등장  ·  최대 체력 50% / 공격력 150%";augmentFlashTimer=140;return true;
         }
         if(practiceActive&&practiceProtect){hp=PlayerMaxHealth;hpTrail=hp;invuln=90;burnTimer=0;augmentNotice="연습 보호 · 체력 회복";augmentFlashTimer=70;return true;}
         return false;

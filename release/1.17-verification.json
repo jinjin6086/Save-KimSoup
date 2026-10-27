@@ -1,0 +1,695 @@
+{
+  "mechanics": {
+    "checks": 46,
+    "results": [
+      {
+        "pass": true,
+        "title": "All existing hand-clench and breathing frames preserved"
+      },
+      {
+        "pass": true,
+        "title": "Lobby cached at 810 x 1080 instead of 480 x 640"
+      },
+      {
+        "lobbyFrames": 60,
+        "averageMs": 13.414323333333334,
+        "loadAndFirstShotMs": 15053.5589
+      },
+      {
+        "pass": true,
+        "title": "Lobby ENTER still selects player"
+      },
+      {
+        "pass": true,
+        "title": "Round 2 boss maximum HP 25"
+      },
+      {
+        "pass": true,
+        "title": "Round 3 boss maximum HP 30"
+      },
+      {
+        "pass": true,
+        "title": "Round 4 boss maximum HP 40"
+      },
+      {
+        "pass": true,
+        "title": "Purgae stays normal after 14 damage"
+      },
+      {
+        "pass": true,
+        "title": "Purgae transforms at 15 damage"
+      },
+      {
+        "pass": true,
+        "title": "Rodian stays normal after 9 damage"
+      },
+      {
+        "pass": true,
+        "title": "Rodian transforms after 10 damage"
+      },
+      {
+        "pass": true,
+        "title": "Truce adds 2500 HP at the existing low-health trigger"
+      },
+      {
+        "pass": true,
+        "title": "Truce no longer heals boss"
+      },
+      {
+        "pass": true,
+        "title": "Truce still activates only once per round"
+      },
+      {
+        "pass": true,
+        "title": "Truce threshold remains strictly below 500"
+      },
+      {
+        "pass": true,
+        "title": "Wolf Truce adds half its own 4000 maximum"
+      },
+      {
+        "pass": true,
+        "title": "Clone revival retains half maximum health"
+      },
+      {
+        "pass": true,
+        "title": "Human clone deals 1.5 times original player damage"
+      },
+      {
+        "pass": true,
+        "title": "Wolf clone retains half HP and multiplies original 1.5 damage by 1.5"
+      },
+      {
+        "pass": true,
+        "title": "Feast gameplay remains ten percent heal and one boss damage every fifth kick"
+      },
+      {
+        "pass": true,
+        "title": "Fifth kick starts draining-kiss visual"
+      },
+      {
+        "pass": true,
+        "title": "Meteor Feast preserves heal without boss damage or misleading boss-drain visual"
+      },
+      {
+        "pass": true,
+        "title": "Six new moonwalk poses load"
+      },
+      {
+        "pass": true,
+        "title": "Dodge duration and immunity unchanged"
+      },
+      {
+        "pass": true,
+        "title": "Dodge still avoids enemy damage"
+      },
+      {
+        "pass": true,
+        "title": "No anticipatory lean without a nearby attack"
+      },
+      {
+        "pass": true,
+        "title": "A projectile three frames from contact triggers the evasion motion"
+      },
+      {
+        "pass": true,
+        "title": "Moonwalk presentation does not silently move player collision coordinates"
+      },
+      {
+        "pass": true,
+        "title": "Incoming projectiles reflect while Dodge remains active"
+      },
+      {
+        "pass": true,
+        "title": "Reflecting does not cancel Dodge"
+      },
+      {
+        "pass": true,
+        "title": "Wolf shares opaque Dodge presentation without spontaneous near-hit cues"
+      },
+      {
+        "pass": true,
+        "title": "Passive draft has exactly five cards"
+      },
+      {
+        "pass": true,
+        "title": "Reserved blank ID is absent and Flow remains selectable"
+      },
+      {
+        "pass": true,
+        "title": "Sixth blank card is not available"
+      },
+      {
+        "pass": true,
+        "title": "Key 6 cannot select a hidden phantom passive"
+      },
+      {
+        "pass": true,
+        "title": "Key 5 correctly selects Flow"
+      },
+      {
+        "pass": true,
+        "title": "All six active skills remain available"
+      },
+      {
+        "pass": true,
+        "title": "Last-stand trigger preserved"
+      },
+      {
+        "pass": true,
+        "title": "QTE framing does not alter battle actor coordinates"
+      },
+      {
+        "pass": true,
+        "title": "QTE actors have longer horizontal separation and airborne boss height"
+      },
+      {
+        "pass": true,
+        "title": "Requested three monologue lines precede the existing family vow"
+      },
+      {
+        "pass": true,
+        "title": "Longer readable monologue leaves QTE target and input time intact"
+      },
+      {
+        "pass": true,
+        "title": "70 independent presses still succeed in ten seconds"
+      },
+      {
+        "pass": true,
+        "title": "Success reaches boss explosion and post-QTE continuation"
+      },
+      {
+        "pass": true,
+        "title": "69 presses still fail under original rules"
+      },
+      {
+        "pass": true,
+        "title": "Requested Rodian gratitude dialogue applied"
+      }
+    ]
+  },
+  "story": {
+    "checks": 98,
+    "results": [
+      {
+        "pass": true,
+        "label": "Character selection enters kidnapping prologue"
+      },
+      {
+        "pass": true,
+        "label": "Story pause stops clock and advance input"
+      },
+      {
+        "pass": true,
+        "label": "Story pauses on focus loss"
+      },
+      {
+        "pass": true,
+        "label": "Kidnapping cannot be skipped before pickup"
+      },
+      {
+        "pass": true,
+        "label": "Early Enter preserves action"
+      },
+      {
+        "pass": true,
+        "label": "Opening excluded from clear time"
+      },
+      {
+        "pass": true,
+        "label": "Kidnap leads to player waking"
+      },
+      {
+        "pass": true,
+        "label": "Q blocked during story"
+      },
+      {
+        "pass": true,
+        "label": "Wake leads to note front"
+      },
+      {
+        "pass": true,
+        "label": "Note flips to castle address"
+      },
+      {
+        "pass": true,
+        "label": "Anger leads to departure"
+      },
+      {
+        "pass": true,
+        "label": "Departure leads to meadow monologue"
+      },
+      {
+        "pass": true,
+        "label": "Opening starts round1 exactly once"
+      },
+      {
+        "pass": true,
+        "label": "Castle exchange leads to clear and Q reward"
+      },
+      {
+        "pass": true,
+        "label": "Clear opens existing reward selection"
+      },
+      {
+        "pass": true,
+        "label": "Reward enters destination route 2"
+      },
+      {
+        "pass": true,
+        "label": "Travel reaches round 2"
+      },
+      {
+        "pass": true,
+        "label": "Intro -> mechanics -> combat"
+      },
+      {
+        "pass": true,
+        "label": "Round2 final exchange precedes explosion"
+      },
+      {
+        "pass": true,
+        "label": "Explosion is not advancing behind dialogue"
+      },
+      {
+        "pass": true,
+        "label": "Final dialogue excluded from clear time"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue resumes original defeat cinematic once"
+      },
+      {
+        "pass": true,
+        "label": "Original explosion finishes"
+      },
+      {
+        "pass": true,
+        "label": "Clear opens existing reward selection"
+      },
+      {
+        "pass": true,
+        "label": "Reward enters destination route 3"
+      },
+      {
+        "pass": true,
+        "label": "Travel reaches round 3"
+      },
+      {
+        "pass": true,
+        "label": "Rage dialogue returns to same battle"
+      },
+      {
+        "pass": true,
+        "label": "Round3 final exchange precedes explosion"
+      },
+      {
+        "pass": true,
+        "label": "Explosion is not advancing behind dialogue"
+      },
+      {
+        "pass": true,
+        "label": "Final dialogue excluded from clear time"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue resumes original defeat cinematic once"
+      },
+      {
+        "pass": true,
+        "label": "Original explosion finishes"
+      },
+      {
+        "pass": true,
+        "label": "Clear opens existing reward selection"
+      },
+      {
+        "pass": true,
+        "label": "Reward enters destination route 4"
+      },
+      {
+        "pass": true,
+        "label": "Travel reaches round 4"
+      },
+      {
+        "pass": true,
+        "label": "Menhera dialogue returns to same battle"
+      },
+      {
+        "pass": true,
+        "label": "Original last stand trigger remains"
+      },
+      {
+        "pass": true,
+        "label": "QTE is 70 presses in the same ten seconds"
+      },
+      {
+        "pass": true,
+        "label": "70 timed presses complete QTE"
+      },
+      {
+        "pass": true,
+        "label": "QTE success reaches original departure"
+      },
+      {
+        "pass": true,
+        "label": "Round4 clear enters cell approach"
+      },
+      {
+        "pass": true,
+        "label": "Optional final boss choice preserved"
+      },
+      {
+        "pass": true,
+        "label": "Skip optional boss reaches rescue"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 0:0"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 0:1"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 0:2"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 0:3"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 1:0"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 1:1"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 2:0"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 2:1"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 3:0"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 3:1"
+      },
+      {
+        "pass": true,
+        "label": "Ending line 3:2"
+      },
+      {
+        "pass": true,
+        "label": "All 11 PDF ending lines reach game clear"
+      },
+      {
+        "pass": true,
+        "label": "Optional boss travel reaches existing boss5"
+      },
+      {
+        "pass": true,
+        "label": "69 presses fail under the new 70-press rule"
+      },
+      {
+        "pass": true,
+        "label": "Practice bypasses narrative"
+      },
+      {
+        "pass": true,
+        "label": "Checkpoint retry does not replay prologue/travel"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 어제 훔친 돼지를 닮았군.. "
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 뭣."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 헛소리 하지말고 김스프의 위치"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 그래.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 싫은데ㅋ"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 그럼 뭐 말할 때까지 패면 되"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 뭐냐 이 인간은.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 내 돼지 내놔"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 내 양분이 될 가축을 네게?"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 뭔.. 개소리야.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 그 돼지는 곧 내 힘을 되찾을"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 하찮은 인간 주제에 꺼져라.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 넌 나를 화나게 했다."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 풀어줘서 고마워... 너가 내"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 사모님.. 왜 갇혀있는지는 모"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: ...안돼.. 넌 내 공연의 "
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 이건 진짜 위험한데.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 하.. 정말 귀찮게 구는군.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 이젠 변신까지 하네.. 하.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 그래.. 저 깊은 지하에 신선"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 그래?"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 이제 진짜 끝내줄께"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 왜…"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 왜!!!!"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: (속으로) 어우 쏏"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 왜 내 공연을 보려고 하지 않"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 당연하지."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: ...."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 가질 수 없다면.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 부서버리겠어!!!"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 야 죽기전에 위치는 말하고 죽"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 내 뒤쪽에 있는 문을 열면 김"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 그래 이제 죽으렴"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 흐흐.. 어짜피 넌 군주님을 "
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 정말 강한녀석이군 너는.."
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 아으 따가워.. 진짜 기분나쁘"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 남겨진 내 아내보다 강할지는 "
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 아.. 또 있나 보내..ㅉ"
+      },
+      {
+        "pass": true,
+        "label": "Dialogue fits panel: 삶을 더 연명하고자 하는 욕심"
+      }
+    ]
+  },
+  "gpu": {
+    "pass": true,
+    "records": [
+      {
+        "phase": 1,
+        "clock": 130,
+        "image": "01-boss-charge.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 3,
+        "clock": 155,
+        "image": "02-monologue-sweat.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 8,
+        "clock": 180,
+        "image": "03-hero-charge.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 4,
+        "clock": 240,
+        "image": "04-clash-middle.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 4,
+        "clock": 530,
+        "image": "05-clash-pushing.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 90,
+        "image": "06-victory-wide.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 112,
+        "image": "07-impact.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 160,
+        "image": "08-explosion-start.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 196,
+        "image": "09-explosion-full.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 316,
+        "image": "10-explosion-tail.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "backend": "Direct3D 11 GPU · NVIDIA GeForce RTX 5060 Ti",
+        "hardware": true
+      },
+      {
+        "frames": 12,
+        "cpuSceneAndSubmitMeanMs": 7.222124999999998,
+        "maxMs": 10.56,
+        "note": "Hidden-window scene and GPU submission timing, not measured display FPS."
+      },
+      {
+        "pass": true,
+        "detail": "GPU state exits at completion and aftermath renders through existing game scene"
+      }
+    ]
+  },
+  "audio": [
+    {
+      "key": 9,
+      "seconds": 24.3,
+      "rms": 0.08374447461686746,
+      "peak": 0.540863037109375,
+      "clipped_samples": 0,
+      "pre_explosion_silence_peak": 0.0
+    },
+    {
+      "key": 10,
+      "seconds": 32.0,
+      "rms": 0.0837449010644129,
+      "peak": 0.49676513671875,
+      "clipped_samples": 0
+    }
+  ]
+}

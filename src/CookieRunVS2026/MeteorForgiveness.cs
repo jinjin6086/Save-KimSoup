@@ -8,9 +8,9 @@ public sealed partial class GamePanel
     private static bool CanKickProjectile(Projectile p,RectangleF zone)
     {
         if(p.Type!=AttackType.Meteor)return zone.IntersectsWith(p.Rect);
-        // Keep upgrade range, add a small meteor-only grace margin, then sweep
+        // Keep upgrade range, add a wider meteor-only grace margin, then sweep
         // its actual center segment to avoid missing a fast diagonal descent.
-        zone.Inflate(14+p.W*.5f,14+p.H*.5f);
+        zone.Inflate(30+p.W*.5f,38+p.H*.5f);
         return SegmentTouchesRectangle(p.PreviousX+p.W*.5f,p.PreviousY+p.H*.5f,p.X+p.W*.5f,p.Y+p.H*.5f,zone);
     }
     private static bool SegmentTouchesRectangle(float x0,float y0,float x1,float y1,RectangleF r)

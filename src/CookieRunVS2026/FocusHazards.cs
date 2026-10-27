@@ -128,7 +128,7 @@ public sealed partial class GamePanel
         else if(reflected)end=new(counterTargetX,counterTargetY);
         else end=new(start.X+MathF.Cos(LiveLaserAngle)*1160,start.Y+MathF.Sin(LiveLaserAngle)*1160);
         float dx=end.X-start.X,dy=end.Y-start.Y,length=Math.Max(1,MathF.Sqrt(dx*dx+dy*dy));
-        float nx=-dy/length,ny=dx/length,halfWidth=charge?15:reflected?28.5f:menheraMode?36.5f:32.5f;
+        float nx=-dy/length,ny=dx/length,halfWidth=charge?5:reflected?9.5f:menheraMode?12.1667f:10.8333f;
         Color c=reflected?Color.FromArgb(178,255,231):charge?FocusGuide:FocusDanger;
         float opacity=charge?1:reflected?Math.Clamp((21-laserTimer)/6,0,1):Math.Clamp((58-laserTimer)/16,0,1);
         using var path=new GraphicsPath();path.AddLines(new[]{new PointF(start.X+nx*halfWidth,start.Y+ny*halfWidth),new PointF(end.X+nx*halfWidth,end.Y+ny*halfWidth),new PointF(end.X-nx*halfWidth,end.Y-ny*halfWidth),new PointF(start.X-nx*halfWidth,start.Y-ny*halfWidth)});path.CloseFigure();

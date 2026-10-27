@@ -3,11 +3,11 @@ namespace CookieRunVS2026;
 public sealed partial class GamePanel
 {
     private const int LastStandTarget=70;
-    private const float LastStandClashZoom=2.05f;
+    private const float LastStandClashZoom=1.65f;
     private const float LastStandLimit=600,LastStandMinimum=600;
-    // Four document lines need eight seconds to read. The ten-second input
+    // Six monologue lines need twelve seconds to read. The ten-second input
     // window and every cue relative to the hopeful music remain unchanged.
-    private const float LastStandMemoryFrames=480,LastStandGatherFrames=210,LastStandIgniteFrames=36,LastStandFinishFrames=FinaleTiming.Finish;
+    private const float LastStandMemoryFrames=720,LastStandGatherFrames=210,LastStandIgniteFrames=36,LastStandFinishFrames=FinaleTiming.Finish;
     // Despair -> rage -> charge -> rush -> remembered promise -> gather -> ignition -> ten-second
     // clash -> overpower. Clocks are real simulation frames, independent of slow.
     private int lastStandPhase,lastStandPresses,lastStandAttempts,lastStandBeat=-1,lastStandSuccessBeat;
@@ -35,7 +35,7 @@ public sealed partial class GamePanel
         laserActive=dashActive=fullRush=sparkActive=false;melodyStep=-1;melodyBurstActive=false;
         phaseIntroKind=0;phaseCleanupPending=false;cinematicTimer=hitStopTimer=cameraShakeTimer=screenFlashTimer=0;
         focusEntryTimer=focusExitTimer=0;parryWindow=parryCooldown=0;sliding=false;menheraMode=true;
-        lastHeroX=selectedCookie==0?px+95:px+91;lastHeroY=selectedCookie==0?py-39:py-8;lastBossX=bossX-10;lastBossY=bossY+55;
+        lastHeroX=selectedCookie==0?FinalePlayerAnchorX+95:FinalePlayerAnchorX+91;lastHeroY=selectedCookie==0?py-39:py-8;lastBossX=FinaleBossAnchorX-10;lastBossY=FinaleBossAnchorY+55;
         if(rodianLastVowMotion.Length>0){var muzzle=RodianLastVowPoint(5,RodianMicrophones);var body=FinaleBossBounds;lastBossX=body.X+body.Width*muzzle.X;lastBossY=body.Y+body.Height*muzzle.Y;}
         lastStandPulse=0;lastStandSoundClock=0;bossMessage="";bossShoutTimer=0;
         audio.SetFinaleMix(.12f);ReleaseInputs();return true;
@@ -147,10 +147,10 @@ public sealed partial class GamePanel
     {
         get
         {
-            float bx=bossX+65,by=bossY+70,hx=px+64,hy=py;
-            if(lastStandPhase==10){float t=SmootherUnit(lastStandClock/72);return(Mix(1,2.65f,t),Mix(500,bossX+39,t),Mix(300,bossY+78,t));}
-            if(lastStandPhase==11){float t=SmootherUnit((lastStandClock-RodianRageRelease)/58);return(Mix(2.65f,2.38f,t),Mix(bossX+39,bossX+53,t),Mix(bossY+78,bossY+70,t));}
-            if(lastStandPhase==1){float t=SmootherUnit(lastStandClock/150);return(Mix(2.38f,1.95f,t),Mix(bossX+53,bx,t),by);}
+            float bx=FinaleBossAnchorX+65,by=FinaleBossAnchorY+70,hx=FinalePlayerAnchorX+64,hy=py;
+            if(lastStandPhase==10){float t=SmootherUnit(lastStandClock/72);return(Mix(1,2.65f,t),Mix(500,FinaleBossAnchorX+39,t),Mix(300,FinaleBossAnchorY+78,t));}
+            if(lastStandPhase==11){float t=SmootherUnit((lastStandClock-RodianRageRelease)/58);return(Mix(2.65f,2.38f,t),Mix(FinaleBossAnchorX+39,FinaleBossAnchorX+53,t),Mix(FinaleBossAnchorY+78,FinaleBossAnchorY+70,t));}
+            if(lastStandPhase==1){float t=SmootherUnit(lastStandClock/150);return(Mix(2.38f,1.95f,t),Mix(FinaleBossAnchorX+53,bx,t),by);}
             if(lastStandPhase==2){float t=SmootherUnit((lastStandClock-3)/15);return(Mix(1.95f,3.05f,t),Mix(bx,hx,t),Mix(by,hy-3,t));}
             if(lastStandPhase==3)return(3.05f+.08f*SmoothUnit(lastStandClock/LastStandMemoryFrames),hx,hy-3);
             if(lastStandPhase is 8 or 9)return(3.13f,hx,hy-3);
@@ -171,10 +171,10 @@ public sealed partial class GamePanel
             return(1,500,300);
         }
     }
-    private RectangleF FinaleHeroBounds=>new(px-40,py-67,143,143);
+    private RectangleF FinaleHeroBounds=>new(FinalePlayerAnchorX-40,py-67,143,143);
     private RectangleF FinaleBossBounds
     {
-        get{float push=lastStandPhase==5?SmoothUnit((lastStandClock-40)/145)*28:0;return new(bossX-17+push,bossY-3,185,185);}
+        get{float push=lastStandPhase==5?SmoothUnit((lastStandClock-40)/145)*28:0;return new(FinaleBossAnchorX-17+push,FinaleBossAnchorY-3,185,185);}
     }
     private float FinaleHeroPose=>lastStandPhase switch{8=>SmoothUnit((lastStandClock-42)/66),9=>1+SmoothUnit(lastStandClock/18),4 or 5=>2,_=>0};
     private PointF FinaleHeroSocket
@@ -196,7 +196,7 @@ public sealed partial class GamePanel
         }
         // During her final words the shot belongs to the boss alone.
         if(RodianSoloShot)return;
-        var hr=FinaleHeroBounds;float power=lastStandPhase==8?SmoothUnit(lastStandClock/LastStandGatherFrames):lastStandPhase is 9 or 4 or 5?1:0;
+        var hr=FinaleHeroBounds;DrawCloneAura(g,hr);float power=lastStandPhase==8?SmoothUnit(lastStandClock/LastStandGatherFrames):lastStandPhase is 9 or 4 or 5?1:0;
         if(power>0)
         {
             if(selectedCookie==0&&finaleHeroPoses.Length==3)
@@ -205,8 +205,8 @@ public sealed partial class GamePanel
                 DrawAttachedFire(g,finaleHeroPoses[ii],hr,power*(1-aa),lastStandRealClock*.95f);
                 if(aa>.002f&&ii<2)DrawAttachedFire(g,finaleHeroPoses[ii+1],hr,power*aa,lastStandRealClock*.95f);
             }
-            else if(selectedCookie==1&&wolfPoses.Length==12)DrawAttachedFire(g,wolfPoses[lastStandPhase is 9 or 4 or 5?11:9],new(px-32,py-41,130,120),power,lastStandRealClock*.95f);
-            else DrawAttachedFire(g,null,new(px,py,PlayerWidth,PlayerHeight),power,lastStandRealClock*.95f);
+            else if(selectedCookie==1&&wolfPoses.Length==12)DrawAttachedFire(g,wolfPoses[lastStandPhase is 9 or 4 or 5?11:9],new(FinalePlayerAnchorX-32,py-41,130,120),power,lastStandRealClock*.95f);
+            else DrawAttachedFire(g,null,new(FinalePlayerAnchorX,py,PlayerWidth,PlayerHeight),power,lastStandRealClock*.95f);
 
         }
         if(selectedCookie==0&&finaleHeroPoses.Length==3)
@@ -217,8 +217,8 @@ public sealed partial class GamePanel
             if(a>.002f&&i<2)DrawPlayerSprite(g,finaleHeroPoses[i+1],hr,ClashBlue,a*reveal);
         }
         else if(selectedCookie==1&&wolfPoses.Length==12)DrawWolfFinale(g);
-        else DrawSimpleCookie(g,(int)px,(int)py,PlayerWidth,PlayerHeight);
-
+        else DrawSimpleCookie(g,(int)FinalePlayerAnchorX,(int)py,PlayerWidth,PlayerHeight);
+        if(lastStandPhase==3&&LastStandMemoryIndex==1)DrawFinaleSweat(g,hr);
     }
     private void DrawMelodyLastStand(Graphics g)
     {
@@ -315,8 +315,8 @@ public sealed partial class GamePanel
             DrawEchoFrame(g,endingFriend,new(700,150,145,137),a);
             for(int i=0;i<5;i++)g.DrawLine(ParticlePen(Color.FromArgb(126,150,176),(int)(210*a),3),704+i*32,141,704+i*32,296);
         }
-        string line=t<.25f?"하.. 이젠 한계인가..":t<.5f?"그치만 아직 구하지 못했잖아..":t<.75f?"그깟 돼지가 아니란 말이야..":"내 가족이라고….!";
-        float local=(t*4)%1;
+        string line=LastStandMemoryLines[LastStandMemoryIndex];
+        float local=(t*LastStandMemoryLines.Length)%1;
         float fade=Math.Min(1,local*10)*Math.Min(1,(1-local)*10);
         Label(g,line,new(100,547,800,45),t<.72f?23:27,Color.FromArgb((int)(255*fade),229,239,250));
     }

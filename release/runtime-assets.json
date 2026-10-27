@@ -1,5 +1,5 @@
 {
-  "version": "1.16",
+  "version": "1.17",
   "source": "Release ZIP",
   "files": [
     {
@@ -28,6 +28,11 @@
       "sha256": "27d47ccbfcfda8a2d97651d5947d18302e655b798e581598cc9a8f260cc384f3"
     },
     {
+      "path": "Assets/Audio/RODIAN-RHYTHM-REMAKE-CREDITS.txt",
+      "bytes": 971,
+      "sha256": "aa03eee819bd2bb94bf1723c88473e5ddb7a0240556374d8b2198f803c522f2e"
+    },
+    {
       "path": "Assets/Audio/RODIAN-SONG-CREDITS.txt",
       "bytes": 902,
       "sha256": "d2c345aa1e32e942f079ef47c5775386ab19d266859fa4c567e6e55ac7515dff"
@@ -38,9 +43,24 @@
       "sha256": "30d8501fe8a198876286f37ab0487af7f65750bb459f8708183b6f5b57ba5ce7"
     },
     {
+      "path": "Assets/Audio/score-10.pcm",
+      "bytes": 5644800,
+      "sha256": "a75cdd6b8173c80791c4edca4babd122f54f888c8f3b4db75a634bdc466f7937"
+    },
+    {
+      "path": "Assets/Audio/score-12.pcm",
+      "bytes": 17825684,
+      "sha256": "10763b1d5c71c112427ac3b71b57316710718db6563321979dc5ce4f6a153eb9"
+    },
+    {
       "path": "Assets/Audio/score-13.pcm",
       "bytes": 9031680,
       "sha256": "e9f2c6816d7ec75f762dca97e4e418b803b2e8f1a9a92a8d11bbf5426efe7249"
+    },
+    {
+      "path": "Assets/Audio/score-14.pcm",
+      "bytes": 7056000,
+      "sha256": "90bd796a111599465cad0ae9b74b9bcfb2f043b94f26cad8969b730d0bf8cfb6"
     },
     {
       "path": "Assets/Audio/score-2.pcm",
@@ -66,6 +86,16 @@
       "path": "Assets/Audio/score-8.pcm",
       "bytes": 9072000,
       "sha256": "7ab71639764663f2ce58324ce44cb82d25c9e88aeb38de3f193bd6cb81e48a13"
+    },
+    {
+      "path": "Assets/Audio/score-9.pcm",
+      "bytes": 4286520,
+      "sha256": "bad0aa9c5fd5eaa51ec609e21824417644853d24297b60da2fa6ab1345f8a7ed"
+    },
+    {
+      "path": "Assets/Audio/score-metadata.json",
+      "bytes": 17980,
+      "sha256": "92b018014098e79d54cd67553fce326cbf742e38970e5f24b0154700fd4b3db8"
     },
     {
       "path": "Assets/AuraMaterials.png",
@@ -258,6 +288,21 @@
       "sha256": "742c62cc9a88a8c21cd4e4b4770127a359cf9faa9d8ccba87619c927a40e5310"
     },
     {
+      "path": "Assets/LobbyResolveClosedHD.png",
+      "bytes": 1814040,
+      "sha256": "63ae0e67d052148b78bd9ed13454590188ff588cc03a6272b1a60e8de8128b0a"
+    },
+    {
+      "path": "Assets/LobbyResolveMotion3.png",
+      "bytes": 1851072,
+      "sha256": "32777eceb5c94160cc5a1b509abe7b3ba3edee3391937b1f51f64e527438c5cb"
+    },
+    {
+      "path": "Assets/LobbyResolveOpenHD.png",
+      "bytes": 1704631,
+      "sha256": "728d8d9d07b5884a9a84feb4504e7037179942655e8cf38b82f6a69e9552b6a9"
+    },
+    {
       "path": "Assets/MelodyActions.png",
       "bytes": 1315283,
       "sha256": "65a9c169d45875f08074e0063810696ab89f3421f37aab61b98dc7572f9ae010"
@@ -313,6 +358,11 @@
       "sha256": "9bb550df9c4dcbe276e27614311d03841f2429323db9cb280d7a65367833e30e"
     },
     {
+      "path": "Assets/PlayerMoonwalk6.png",
+      "bytes": 1816222,
+      "sha256": "6355655054960399425df23ece19fb35ea7187f75e012999a0bf94791f2b4606"
+    },
+    {
       "path": "Assets/PlayerMotion.png",
       "bytes": 1947264,
       "sha256": "4c46a95f02d5737011f4d1f968f43bd43c110b26fab5dc2fd22897c35fe2c872"
@@ -363,6 +413,31 @@
       "sha256": "1b9db908c96216cce8185a64857d926fffe9fec808fb8055dc7d729d47aba7f4"
     },
     {
+      "path": "Assets/StoryBedroom.png",
+      "bytes": 2120983,
+      "sha256": "705cc0de37dcc89bed0189c4e6e3e05c55a2ea2dedf65154795adeb0f2c9d1fd"
+    },
+    {
+      "path": "Assets/StoryBedroomMorning.png",
+      "bytes": 2400151,
+      "sha256": "5b1e1be30f903414b7ea47b2327275aa1758727f9e8cdc5ab6ac406e52a10dd6"
+    },
+    {
+      "path": "Assets/StoryBedroomSleeping.png",
+      "bytes": 1964781,
+      "sha256": "eafb221672df059a00ac642ba262bc3be96ad4cb115d6751fdf45d7871f4a319"
+    },
+    {
+      "path": "Assets/StoryHeroAngry.png",
+      "bytes": 1411318,
+      "sha256": "b8a813301d8fc393eb075cdc3c944eb3875ab3c8cd316d29b2348ee3fde28a88"
+    },
+    {
+      "path": "Assets/StoryRoutes.png",
+      "bytes": 3083375,
+      "sha256": "33bdd849ff7f1267cfb04443add039ab330e2d0bafa46d1b5552af27f8fcc43f"
+    },
+    {
       "path": "Assets/WolfPlayerMotion12.png",
       "bytes": 1630312,
       "sha256": "1c139598b1ce391414bad01e16020ccf61fdca1795d092b67d3dc38c90a0754f"
@@ -386,51 +461,6 @@
       "path": "Assets/World4Concert.png",
       "bytes": 2261362,
       "sha256": "9c8eefb6084dbc075d2102d89e672ff505fc0e2eac37b9b902d72038628cf918"
-    },
-    {
-      "path": "Assets/Audio/score-9.pcm",
-      "bytes": 4286520,
-      "sha256": "5e08b132a2b564c35f92f35ea805205faa4d5157944806fc6c1aae6aa22fe478"
-    },
-    {
-      "path": "Assets/Audio/score-10.pcm",
-      "bytes": 4456420,
-      "sha256": "d8e97cb26780bee241a212cc087392f19b510dab7a09d45539eacaf743ea2a3e"
-    },
-    {
-      "path": "Assets/Audio/score-12.pcm",
-      "bytes": 17825684,
-      "sha256": "10763b1d5c71c112427ac3b71b57316710718db6563321979dc5ce4f6a153eb9"
-    },
-    {
-      "path": "Assets/Audio/score-metadata.json",
-      "bytes": 18739,
-      "sha256": "d00c4b6f06a447c63d80063c24e127b44066744f924b2301e5b34d9b35d2ac22"
-    },
-    {
-      "path": "Assets/Audio/RODIAN-RHYTHM-REMAKE-CREDITS.txt",
-      "bytes": 971,
-      "sha256": "aa03eee819bd2bb94bf1723c88473e5ddb7a0240556374d8b2198f803c522f2e"
-    },
-    {
-      "path": "Assets/StoryBedroom.png",
-      "bytes": 2120983,
-      "sha256": "705cc0de37dcc89bed0189c4e6e3e05c55a2ea2dedf65154795adeb0f2c9d1fd"
-    },
-    {
-      "path": "Assets/StoryBedroomSleeping.png",
-      "bytes": 1964781,
-      "sha256": "eafb221672df059a00ac642ba262bc3be96ad4cb115d6751fdf45d7871f4a319"
-    },
-    {
-      "path": "Assets/StoryHeroAngry.png",
-      "bytes": 1411318,
-      "sha256": "b8a813301d8fc393eb075cdc3c944eb3875ab3c8cd316d29b2348ee3fde28a88"
-    },
-    {
-      "path": "Assets/StoryRoutes.png",
-      "bytes": 3083375,
-      "sha256": "33bdd849ff7f1267cfb04443add039ab330e2d0bafa46d1b5552af27f8fcc43f"
     }
   ]
 }

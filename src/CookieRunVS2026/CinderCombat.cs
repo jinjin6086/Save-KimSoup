@@ -82,8 +82,8 @@ public sealed partial class GamePanel
         Label(g,$"취약 {cinderVulnerability}  ·  반사 +{cinderVulnerability*.5f:0.0}  ·  쿠나이 {cinderKunaiHits}/2",new(601,501,367,20),11,Color.FromArgb(255,184,92),false);
     }
     private int DraftCardCount=>pendingDraft==1?ActivePowerCount:PassivePowerCount;
-    private bool DraftCardAvailable(int index)=>index>=0&&index<DraftCardCount&&(pendingDraft==1||index!=4);
-    private Rectangle DraftCardRect(int i)=>augmentCardRects[i];
+    private bool DraftCardAvailable(int index)=>index>=0&&index<DraftCardCount;
+    private Rectangle DraftCardRect(int i)=>pendingDraft==2&&i>=3?new(i==3?199:509,338,292,190):augmentCardRects[i];
     private int NextDraftCard(int offset)
     {
         int p=skillCardFocus;for(int i=0;i<DraftCardCount;i++){p=(p+offset+DraftCardCount)%DraftCardCount;if(DraftCardAvailable(p))return p;}return skillCardFocus;

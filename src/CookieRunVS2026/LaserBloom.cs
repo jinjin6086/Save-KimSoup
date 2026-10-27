@@ -33,12 +33,12 @@ public sealed partial class GamePanel
     }
     private void DrawLaserContactFx(Graphics g)
     {
-        if(!laserActive||round!=4||DodgeActive)return;
+        if(!laserActive||round!=4||(DodgeActive&&!laserReflected))return;
         bool reflected=laserReflected;
         float age=laserTimer,release=reflected?Math.Clamp((21-age)/5,0,1):Math.Clamp(1-age/40,0,1);
         float x=reflected?counterTargetX:laserContactX,y=reflected?counterTargetY:laserContactY;
         Color color=reflected?Color.FromArgb(72,255,223):menheraMode?Color.FromArgb(255,69,115):Color.FromArgb(251,139,225);
-        DrawLaserBloom(g,x,y,reflected?65:45,reflected?52:37,color,release*.9f);
+        DrawLaserBloom(g,x,y,reflected?33:23,reflected?26:19,color,release*.9f);
         if(release<=0)return;
         int count=reducedEffects?8:34;
         for(int i=0;i<count;i++)

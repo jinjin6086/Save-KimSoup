@@ -31,7 +31,7 @@ public sealed class GameForm : Form
 
     public GameForm()
     {
-        Text = "승쿠런 1.16 버전";
+        Text = "승쿠런 1.17 버전";
         ClientSize = new Size(BaseWidth, BaseHeight);
         MinimumSize = new Size(900, 540);
         FormBorderStyle = FormBorderStyle.None;
@@ -380,12 +380,14 @@ public sealed partial class GamePanel : Panel
         BackColor = Color.Black;
         LoadAssets();
         LoadPremiumAssets();LoadIsangjinClockAssets();LoadWolfPlayer();
-        LoadKickCombat();LoadRescueEnding();LoadSkillSpectacle();LoadHighFidelityAuras();
+        LoadKickCombat();LoadRescueEnding();LoadSkillSpectacle();LoadHighFidelityAuras();LoadMoonwalkDodge();
 
         // 입력 이벤트는 실제 게임 패널에서 받아야 합니다.
         // Form의 MouseDown/KeyDown만 연결하면 자식 컨트롤인 GamePanel이
         // 이벤트를 먼저 소비하기 때문에 쿠키 선택 클릭이 먹지 않을 수 있습니다.
         MouseDown += (_, e) => HandleMouseDown(e);
+        MouseMove += (_, e) => UpdateLobbyPointer(e);
+        MouseLeave += (_, _) => { lobbyHovered=-1;Cursor=Cursors.Default; };
         Focus();
     }
 
@@ -453,6 +455,8 @@ public sealed partial class GamePanel : Panel
         if(!CinderBurning)audio.StopCinderFire();
         UpdateRodianBackgroundMusic();
         if (gamePaused) { audio.Collect(); return; }
+        UpdateDialogueVoice(step);
+        UpdateLobbyPresentation(step);
         if(state==GameState.StoryScene){UpdateStoryJourney(step);audio.Collect();return;}
         if(state==GameState.Ending){sceneFadeTimer=Math.Max(0,sceneFadeTimer-step);UpdateRescueEnding(step);UpdatePolish(step);return;}
         if(state==GameState.FinalBossSelect){UpdateFinalBossChoice(step);UpdatePolish(step);audio.Collect();return;}
@@ -624,9 +628,9 @@ public sealed partial class GamePanel : Panel
         bossDamage = 0f;
         bossHitRequired = newRound switch
         {
-            2 => 20, // 이상진
-            3 => 20, // 파괴옥
-            4 => 30, // 강로디언
+            2 => 25, // 이상진
+            3 => 30, // 파괴옥
+            4 => 40, // 강로디언
             5 => 20, // 종결 보스
             _ => 0
         };
@@ -1127,7 +1131,7 @@ public sealed partial class GamePanel : Panel
             return;
 
         bossParryHits++;
-        bossDamage += ResolveBossDamage(pendingBossDamage+(basicReflection?cinderVulnerability*.5f:0)) * (cloneActive ? .5f : 1f)*PlayerAttackMultiplier;
+        bossDamage += ResolveBossDamage(pendingBossDamage+(basicReflection?cinderVulnerability*.5f:0)) * (cloneActive ? 1.5f : 1f)*PlayerAttackMultiplier;
         pendingBossDamage=1;
         bossRecoil=12;
         Burst(bossX+68, bossY+68, Accent(round), 28);
@@ -1229,7 +1233,7 @@ public sealed partial class GamePanel : Panel
 
     private void UpdateParryHits()
     {
-        if (ParryActive && !DodgeActive && !LaserPriorityWindow)
+        if (ParryActive && !LaserPriorityWindow)
         {
             RectangleF parryZone = KickHitBox;
 
@@ -1267,7 +1271,9 @@ public sealed partial class GamePanel : Panel
                 TriggerParryEffect(px + PlayerWidth * 0.5f, py + PlayerHeight * 0.5f, 42f + parryRangeBonus);
                 TriggerCameraShake(2.5f, 5f);
                 flashTimer = 8;
-                parryWindow = 0;
+                // A meteor kick stays active for its original, finite window,
+                // reflecting the dense cluster without demanding one tap per rock.
+                if(target.Type!=AttackType.Meteor)parryWindow = 0;
                 parryCooldown = 0;
             }
         }
@@ -1389,9 +1395,7 @@ public sealed partial class GamePanel : Panel
         {
             if (state == GameState.Title)
             {
-                practiceActive=false;
-                state = GameState.CookieSelect;
-                audio.Play("select");
+                OpenLobbySelection();
             }
             else if (state == GameState.GameOver || state == GameState.Ending)
                 state = GameState.Title;
@@ -1442,8 +1446,8 @@ public sealed partial class GamePanel : Panel
         if(state==GameState.StoryScene){HandleStoryJourneyKey(Keys.Enter);return;}
         if(state==GameState.FinalBossSelect){HandleFinalBossChoiceMouse(x,y);return;}
 
-        if(state==GameState.Title&&new Rectangle(423,406,160,57).Contains(x,y)){OpenPractice();return;}
-        if(state==GameState.Title&&new Rectangle(104,406,300,57).Contains(x,y)){state=GameState.CookieSelect;audio.Play("select");return;}
+        if(state==GameState.Title&&LobbyPracticeBounds.Contains(x,y)){OpenPractice();return;}
+        if(state==GameState.Title&&LobbyStartBounds.Contains(x,y)){OpenLobbySelection();return;}
         if(state==GameState.PracticeSelect){if(new Rectangle(325,466,350,55).Contains(x,y))StartPractice();else if(new Rectangle(105,148,790,130).Contains(x,y))practicePreset=(practicePreset+(x<500?PracticeNames.Length-1:1))%PracticeNames.Length;return;}
         if(bossBriefingActive||bossDefeatActive){HandleEncounterKey(Keys.Enter);return;}
         if(state==GameState.Ending){HandleRescueEndingClick();return;}
@@ -1543,7 +1547,7 @@ public sealed partial class GamePanel : Panel
             return;
 
         BeginKickPose();
-        parryWindow = 10;
+        parryWindow = MeteorSceneActive ? 18 : 10;
         parryCooldown = Math.Max(12f, BaseParryCooldown - parryCooldownReduction); // 기본 1초, 증강마다 0.2초 감소
         player3ShowTimer = 0; // Dedicated kick windup, contact and recovery poses.
         flashTimer = 5;
@@ -1554,7 +1558,7 @@ public sealed partial class GamePanel : Panel
         if (disposing)
         {
             DisposeGpuPrototype();
-            DisposeTrueStopSurfaces();DisposePurgaeAnimation();DisposeLaserBloom();DisposeHighFidelityAuras();DisposeSkillSpectacle();DisposeEncounterFlow();DisposeKickCombat();DisposeRescueEnding();DisposeJourneyResources();DisposeSoulsInterface();
+            DisposeTrueStopSurfaces();DisposePurgaeAnimation();DisposeLaserBloom();DisposeHighFidelityAuras();DisposeSkillSpectacle();DisposeEncounterFlow();DisposeKickCombat();DisposeRescueEnding();DisposeJourneyResources();DisposeSoulsInterface();DisposeLobbyArt();DisposeMoonwalkDodge();
             DisposeArena();
             DisposePremium();
             audio.Dispose();
@@ -1624,7 +1628,7 @@ public sealed partial class GamePanel : Panel
         var mirrorState=g.Save();
         worldMirroring=GravityMirrored&&state==GameState.Round&&!PhaseIntroActive&&!bossBriefingActive&&!IsangjinClockActive;
         if(worldMirroring){g.TranslateTransform(0,H);g.ScaleTransform(1,-1);}
-        if(!MelodyLastStandActive&&state!=GameState.StoryScene)DrawBackground(g);
+        if(!MelodyLastStandActive&&state is not(GameState.StoryScene or GameState.Title or GameState.CookieSelect))DrawBackground(g);
 
         switch (state)
         {
@@ -1740,7 +1744,7 @@ public sealed partial class GamePanel : Panel
 
     private void DrawPlayer(Graphics g)
     {
-        DrawGuardAuraBehind(g);
+        DrawCloneAura(g,new(px-10,py,PlayerWidth+20,PlayerHeight));DrawGuardAuraBehind(g);
         int baseH = sliding ? 40 : PlayerHeight;
         int baseW = sliding ? 58 : PlayerWidth;
         float runBob = onGround && !sliding ? MathF.Sin(frame * 0.30f) * 1.8f : 0f;
@@ -1760,6 +1764,7 @@ public sealed partial class GamePanel : Panel
         if (!blink)
         {
             if(DrawKickActor(g)) { }
+            else if(DodgeActive)DrawMoonwalkDodge(g,new(drawX-9,drawY,drawW+18,drawH));
             else if (player3ShowTimer > 0 && player3 != null && activeTimer<=0)
             {
                 // 발차기 시 Player3가 나타나며 약 1초 후 원래 쿠키로 돌아간다.

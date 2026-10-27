@@ -61,7 +61,7 @@ public sealed partial class GamePanel
     }
     private bool DrawKickActor(Graphics g)
     {
-        if(kickPoseTimer<=0||DodgeActive||sliding)return false;
+        if(kickPoseTimer<=0||sliding)return false;
         float elapsed=18-kickPoseTimer;
         float poseProgress=elapsed<4?elapsed/4:elapsed<10?1:1+(elapsed-10)/8;
         poseProgress=Math.Clamp(poseProgress,0,2);

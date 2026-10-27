@@ -83,7 +83,7 @@ public sealed partial class GamePanel
         else if(!onGround)index=4;
         else index=(int)phase%4;
         float alpha=(cloneActive?.72f:1)*(slideExitTimer>0&&onGround?1-slideExitTimer/6:1);
-        if(DodgeActive){alpha=.34f;target.Offset(-8,0);}
+        if(DodgeActive){DrawMoonwalkDodge(g,target);return;}
         spriteMatrix.Matrix33=alpha;spriteAlpha.SetColorMatrix(spriteMatrix);
         DrawPlayerSprite(g,motionFrames[index],target,Mint,alpha);
         // Short blend through adjacent actual poses softens the contact changes.
@@ -221,24 +221,7 @@ public sealed partial class GamePanel
     }
     private void PremiumTitle(Graphics g)
     {
-        DrawSoulsMenuBase(g,.76f);
-        using(var shade=new LinearGradientBrush(new Rectangle(0,0,W,H),Color.FromArgb(168,9,9,10),Color.FromArgb(12,9,9,10),0f))g.FillRectangle(shade,0,0,W,H);
-        Label(g,"달리기 · 발차기 · 보스전",new(83,81,480,26),12,Gold,false,false);
-        using(var edge=new Pen(Color.FromArgb(80,Gold),1))g.DrawLine(edge,82,119,82,329);
-        SoulsHeading(g,"김스프를",new(100,134,520,83),58,Paper,false);
-        SoulsHeading(g,"구해라",new(98,217,520,92),72,Paper,false);
-        DrawSoulsRule(g,104,326,385);
-        Label(g,"보스들을 물리치고 김스프를 구하세요.",new(104,346,486,32),14,Steel,false,false);
-        PanelSurface(g,new(104,406,300,57),Gold,true);
-        Label(g,"ENTER    게임 시작",new(119,415,270,38),18,Paper);
-        if(motionFrames.Length>0)
-        {
-            using var floor=new SolidBrush(Color.FromArgb(104,0,0,0));g.FillEllipse(floor,642,477,172,17);
-            DrawReadableSprite(g,motionFrames[0],new Rectangle(626,208,200,278),Gold,.94f);
-        }
-        PanelSurface(g,new(423,406,160,57),Gold);Label(g,"T  연습 모드",new(423,406,160,57),15,Paper);
-        Label(g,"4개 라운드  /  능력 직접 선택  /  선택 도전: 종결 보스",new(104,479,570,26),12,Gold,false,false);
-        Label(g,"↑ 점프    ↓ 슬라이드    SPACE / SHIFT 발차기    Q 스킬    P 일시정지",new(45,549,720,26),11,Steel,false,false);
+        DrawResolveLobby(g);
     }
     private void DrawSkillCards(Graphics g)
     {
@@ -247,7 +230,7 @@ public sealed partial class GamePanel
         Label(g,pendingDraft==1?"라운드 1 클리어":"라운드 2 클리어",new(150,26,700,23),12,Gold);
         SoulsHeading(g,selectedCard<0?(pendingDraft==1?"Q 스킬 선택":"패시브 스킬 선택"):"능력 획득",new(100,52,800,43),30,Paper);
         DrawSoulsRule(g,350,103,300);
-        Label(g,selectedCard<0?(pendingDraft==1?"6개 Q 스킬 중 하나를 고르세요.":"패시브 5개 중 선택 · 공백 칸은 선택할 수 없습니다."):CardName(hiddenCards[selectedCard])+" 선택 완료",new(100,111,800,24),12,selectedCard<0?Steel:Gold,true,false);
+        Label(g,selectedCard<0?(pendingDraft==1?"6개 Q 스킬 중 하나를 고르세요.":"5개 패시브 중 하나를 고르세요."):CardName(hiddenCards[selectedCard])+" 선택 완료",new(100,111,800,24),12,selectedCard<0?Steel:Gold,true,false);
         for(int i=0;i<DraftCardCount;i++)
         {
             Rectangle r=DraftCardRect(i);bool chosen=selectedCard==i,focused=selectedCard<0&&skillCardFocus==i;
@@ -266,11 +249,11 @@ public sealed partial class GamePanel
             if(selectedCard>=0&&!chosen){using var dim=new SolidBrush(Color.FromArgb(133,6,7,8));g.FillRectangle(dim,0,0,r.Width,r.Height);}
             g.Restore(saved);
         }
-        Label(g,selectedCard<0?(pendingDraft==1?"1~6 / 카드 클릭  ·  방향키 + ENTER 선택":"1~4, 6 / 카드 클릭  ·  방향키 + ENTER 선택"):"ENTER  다음 라운드  ·  잠시 후 자동 진행",new(110,533,780,27),12,selectedCard<0?Steel:Gold);
+        Label(g,selectedCard<0?(pendingDraft==1?"1~6 / 카드 클릭  ·  방향키 + ENTER 선택":"1~5 / 카드 클릭  ·  방향키 + ENTER 선택"):"ENTER  다음 라운드  ·  잠시 후 자동 진행",new(110,533,780,27),12,selectedCard<0?Steel:Gold);
     }
     private void PremiumSelect(Graphics g)
     {
-        DrawSoulsMenuBase(g,.88f);
+        DrawLobbyBackdrop(g,true);
         Label(g,"게임 준비",new(100,44,800,25),12,Gold,true,false);
         SoulsHeading(g,"캐릭터 선택",new(100,83,800,53),31,Paper);
         DrawSoulsRule(g,355,147,290);

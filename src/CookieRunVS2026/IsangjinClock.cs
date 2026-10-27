@@ -20,7 +20,7 @@ public sealed partial class GamePanel
     private readonly Keys[] IsangjinBeatKeys=new Keys[6];
     private static readonly int[] IsangjinClockPatterns=Enumerable.Range(0,64).Where(n=>System.Numerics.BitOperations.PopCount((uint)n)==3).ToArray();
     private int isangjinPreviousPattern=-1;
-    private const float IsangjinBeatWindow=8;
+    private const float IsangjinBeatWindow=5;
     private static readonly Color ClockBlue=Color.FromArgb(155,218,245),ClockGold=Color.FromArgb(239,195,119);
     private bool IsangjinClockActive=>state==GameState.Round&&round==2&&isangjinClockPhase>0;
     private sealed class ClockShard

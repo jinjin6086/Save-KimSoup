@@ -100,7 +100,7 @@ public sealed partial class GamePanel
             g.DrawLine(core,lastHeroX,lastHeroY,x+27,y-9);
             if(finaleHeroMotion.Length>0&&selectedCookie==0)DrawDetailedImpactActor(g,finaleHeroMotion[^1],FinaleHeroBounds,ink,white);
             else if(finaleHeroPoses.Length>2&&selectedCookie==0)DrawDetailedImpactActor(g,finaleHeroPoses[2],FinaleHeroBounds,ink,white);
-            else if(selectedCookie==1&&wolfPoses.Length==12)DrawDetailedImpactActor(g,wolfPoses[11],new(px-32,py-41,130,120),ink,white);
+            else if(selectedCookie==1&&wolfPoses.Length==12)DrawDetailedImpactActor(g,wolfPoses[11],new(FinalePlayerAnchorX-32,py-41,130,120),ink,white);
             if(finaleBossPoses.Length>1)DrawDetailedImpactActor(g,finaleBossPoses[1],FinaleBossBounds,ink,white);
         }
         else

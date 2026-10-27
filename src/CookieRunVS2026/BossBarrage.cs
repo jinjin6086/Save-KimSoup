@@ -135,10 +135,10 @@ public sealed partial class GamePanel
                 // Every meteor converges on the centered player; no empty side lanes.
                 float offset=0;
                 float target=px+PlayerWidth*.5f+offset+rng.Next(-6,7),x=target+rng.Next(-150,151),y=-70-rng.Next(0,45);
-                float dx=target-x,dy=GroundY+6-y,length=MathF.Sqrt(dx*dx+dy*dy),speed=18+rng.NextSingle()*3;
+                float dx=target-x,dy=GroundY+6-y,length=MathF.Sqrt(dx*dx+dy*dy),speed=16+rng.NextSingle()*2;
                 projectiles.Add(new(x-22,y-22,AttackType.Meteor,44,dx/length*speed,dy/length*speed,PurgaeSkill1MeteorDamage)
                     {IsFocusedMeteor=true,FocusX=target,FocusY=GroundY+6});
-                meteorRainEmitted++;meteorShotsRemaining--;meteorSpawnTimer+=3;
+                meteorRainEmitted++;meteorShotsRemaining--;meteorSpawnTimer+=4;
             }
             bool incoming=projectiles.Any(p=>p.Type==AttackType.Meteor&&!p.IsParried);
             if(meteorShotsRemaining==0&&!incoming){meteorPhase=3;meteorSceneClock=0;}

@@ -10,7 +10,7 @@ public sealed partial class GamePanel
     private int journeyKind,journeyScene,journeyLine,journeyNext,journeyFoot=-1;
     private float journeyClock,journeyTextClock,journeyLock;
     private bool journeyRevealed,storyDefeatTalk,storyDefeatDone,journeyCue;
-    private Bitmap? journeyBedroom,journeySleepingBedroom,journeyRoutes;
+    private Bitmap? journeyBedroom,journeySleepingBedroom,journeyMorningBedroom,journeyRoutes;
     private Image? journeyAngryHero;
     private readonly Bitmap?[] journeyWorlds=new Bitmap?[4];
     private bool journeyLoaded;
@@ -47,7 +47,7 @@ public sealed partial class GamePanel
     private float JourneyDialogueWait=>journeyKind==3?90:journeyScene==1?100:journeyScene is 2 or 3?62:40;
     private int JourneyVisible=>journeyRevealed?JourneyLines[journeyLine].Text.Length:
         Math.Clamp((int)((journeyTextClock-JourneyDialogueWait)/1.8f),0,JourneyLines[journeyLine].Text.Length);
-    private int JourneyMusicKey=>journeyKind==1?(journeyScene>=4?1:0):journeyKind==3?1:
+    private int JourneyMusicKey=>journeyKind==1?(journeyScene>=4?1:14):journeyKind==3?1:
         journeyClock<188?(round==4?12:round==3?13:round==5?13:round):journeyNext switch{2=>2,3=>13,4=>12,5=>FinalBossKind==0?13:FinalBossKind==1?3:4,_=>2};
 
     private void EnsureJourneyResources()
@@ -55,6 +55,7 @@ public sealed partial class GamePanel
         if(journeyLoaded)return;journeyLoaded=true;EnsureStoryResources();
         journeyBedroom=LoadEndingBackdrop("StoryBedroom.png");
         journeySleepingBedroom=LoadEndingBackdrop("StoryBedroomSleeping.png");
+        journeyMorningBedroom=LoadEndingBackdrop("StoryBedroomMorning.png");
         journeyAngryHero=LoadImage("StoryHeroAngry.png");
         string routes=AssetPath("StoryRoutes.png");
         if(File.Exists(routes))journeyRoutes=new Bitmap(routes);
@@ -62,7 +63,7 @@ public sealed partial class GamePanel
     }
     private void DisposeJourneyResources()
     {
-        journeyBedroom?.Dispose();journeySleepingBedroom?.Dispose();journeyRoutes?.Dispose();journeyAngryHero?.Dispose();
+        journeyBedroom?.Dispose();journeySleepingBedroom?.Dispose();journeyMorningBedroom?.Dispose();journeyRoutes?.Dispose();journeyAngryHero?.Dispose();
         foreach(var b in journeyWorlds)b?.Dispose();
     }
     private void ResetStoryJourney()
@@ -79,7 +80,7 @@ public sealed partial class GamePanel
         projectiles.Clear();obstacles.Clear();risingObstacles.Clear();
         laserActive=dashActive=sparkActive=false;burnTimer=hitStopTimer=cameraShakeTimer=screenFlashTimer=0;
     }
-    private void BeginOpeningStory(){round=1;ResetEncounterFlow();OpenJourney(1,1);}
+    private void BeginOpeningStory(){round=1;ResetEncounterFlow();audio.PreloadMusic(14);OpenJourney(1,1);}
     private void BeginFirstGateStory()
     {
         if(practiceActive){BeginRoundTransition(2,false);return;}
@@ -108,7 +109,7 @@ public sealed partial class GamePanel
         }
         else if(journeyKind==2)
         {
-            if(journeyClock<156||journeyClock>222)JourneyFootsteps(step,journeyNext is 3 or 4?2:1);
+            if(journeyClock<179||(journeyClock>218&&journeyClock<300))JourneyFootsteps(step,journeyNext is 3 or 4?2:1);
             if(!journeyCue&&journeyClock>=168){journeyCue=true;audio.Play("select");}
             if(journeyClock>=JourneyTravelFrames)FinishStageTravel();
         }
@@ -121,10 +122,14 @@ public sealed partial class GamePanel
     }
     private void FinishStageTravel()
     {
-        int next=journeyNext;ResetStoryJourney();
+        int next=journeyNext;bool arrived=journeyKind==2;ResetStoryJourney();
         if(next==0){OpenFinalBossChoice();return;}
         if(next<0){BeginRescueEnding();return;}
-        StartRound(next);sceneFadeTimer=18;
+        StartRound(next);
+        // The arrival shot already brought the runner onto the arena floor.
+        // Resume the recognition beat instead of teleporting back offscreen.
+        if(arrived&&bossBriefingActive)bossTalkClock=108;
+        sceneFadeTimer=arrived?SceneFadeFrames:18;
     }
     private bool HandleStoryJourneyKey(Keys key)
     {
@@ -202,7 +207,7 @@ public sealed partial class GamePanel
             JourneyBackdrop(g,journeyWorlds[0],-journeyClock*.018f,1.08f);
             DrawJourneyActor(g,265,426,145,true);DrawJourneyAtmosphere(g,0);return;
         }
-        JourneyBackdrop(g,journeyScene==0?journeySleepingBedroom??journeyBedroom:journeyBedroom,MathF.Sin(journeyClock*.0025f)*2,1.015f);
+        JourneyBackdrop(g,journeyScene==0?journeySleepingBedroom??journeyBedroom:journeyMorningBedroom??journeyBedroom,MathF.Sin(journeyClock*.0025f)*2,1.015f);
         if(journeyScene==0)
         {
             float enter=EndingSmooth(Math.Clamp((journeyClock-48)/100,0,1));
@@ -239,7 +244,7 @@ public sealed partial class GamePanel
                 g.DrawArc(pen,595,310,99,41,10,160);
                 StoryLabel(g,"?",new(360,239,35,40),28,Gold,true);
             }
-            JourneyFade(g,1-EndingSmooth(journeyClock/24));return;
+            JourneyFade(g,1-EndingSmooth(Math.Clamp(journeyClock/32,0,1)));return;
         }
         if(journeyScene is 2 or 3)
         {
@@ -304,27 +309,57 @@ public sealed partial class GamePanel
     {
         float t=journeyClock;
         int route=journeyNext switch{2=>0,3=>1,4=>2,_=>3};
-        if(t<202)
+        if(t<198)
         {
-            float walk=EndingSmooth(Math.Clamp(t/187,0,1));
-            DrawJourneyRoute(g,route,walk*38);DrawJourneyAtmosphere(g,route);
-            DrawJourneyActor(g,216+walk*515,445,148,true,1-EndingSmooth(Math.Clamp((t-172)/25,0,1)));
-            // An entering runner is occluded by the entrance, then the camera
-            // passes the jamb. This is a spatial cut, rather than a title slide.
-            float cover=EndingSmooth(Math.Clamp((t-174)/28,0,1));
-            using var jamb=new SolidBrush(Color.FromArgb(255,6,8,11));
-            g.FillRectangle(jamb,W*(1-cover),0,W*cover,H);
-            if(t<85)StoryLabel(g,"저벅저벅",new(260,388,170,27),14,Color.FromArgb((int)(120*MathF.Sin(Math.Clamp(t/85,0,1)*MathF.PI)),224,213,194),true);
+            // Accelerate briefly, then keep a steady run as the camera tracks
+            // the entrance. No ease-in/ease-out skating across the entire shot.
+            float walk=t<24?t*t/(2*24):t-12;
+            float pan=Math.Min(45,walk*.25f);
+            DrawJourneyRoute(g,route,pan);DrawJourneyAtmosphere(g,route);
+            float actorX=JourneyExitActorX(t);
+            // Keep the entire silhouette opaque and at a stable scale until
+            // even its trailing edge has crossed the right screen boundary.
+            DrawJourneyActor(g,actorX,445,148,true,1,journeyClock);
+            // Darkness belongs to passing through the doorway, rather than
+            // an opaque rectangular wipe that cuts across the running actor.
+            JourneyFade(g,EndingSmooth(Math.Clamp((t-182)/16,0,1)));
         }
         else
         {
             int idx=journeyNext switch{2=>1,3=>2,4=>3,5=>Math.Clamp(FinalBossKind+1,0,3),_=>1};
-            float arrive=EndingSmooth(Math.Clamp((t-211)/102,0,1));
-            JourneyBackdrop(g,journeyWorlds[idx],16*(1-arrive),1.055f);
+            float arrive=EndingSmooth(Math.Clamp((t-198)/102,0,1));
+            DrawJourneyArenaBackdrop(g,idx);
             DrawJourneyAtmosphere(g,idx);
-            DrawJourneyActor(g,-66+arrive*276,idx==2?429:440,148,true);
-            JourneyFade(g,1-EndingSmooth(Math.Clamp((t-202)/28,0,1)));
+            float x=-66+arrive*276,stop=EndingSmooth(Math.Clamp((t-278)/24,0,1));
+            // Match the arena's actor scale and floor before handing control
+            // to its existing recognition/dialogue sequence.
+            float height=PlayerHeight;
+            DrawJourneyActor(g,x,GroundY,height,stop<1,1-stop,journeyClock);
+            if(stop>0)DrawJourneyActor(g,x,GroundY,height,false,stop);
+            float fadeIn=1-EndingSmooth(Math.Clamp((t-198)/20,0,1));
+            float fadeOut=EndingSmooth(Math.Clamp((t-312)/18,0,1));
+            JourneyFade(g,Math.Max(fadeIn,fadeOut));
         }
+    }
+    private static float JourneyExitActorX(float time)
+    {
+        float distance=time<24?time*time/48:time-12;
+        return 180+distance*5.3f-Math.Min(45,distance*.25f);
+    }
+    private void DrawJourneyArenaBackdrop(Graphics g,int index)
+    {
+        Bitmap? image=journeyWorlds[index];
+        if(image==null){JourneyBackdrop(g,null);return;}
+        // The destination uses the combat arena's exact floor mapping and
+        // grading, not a full-screen painting with a different walking plane.
+        float contact=image.Height*WorldContact[index];
+        using var palette=new ImageAttributes();
+        palette.SetColorMatrix(new ColorMatrix(new[]{new[]{.65f,.06f,.06f,0,0},new[]{.06f,.65f,.06f,0,0},new[]{.06f,.06f,.65f,0,0},new[]{0f,0,0,1,0},new[]{0f,0,0,0,1}}));
+        g.DrawImage(image,new Rectangle(0,0,W,GroundY),0,0,image.Width,contact,GraphicsUnit.Pixel,palette);
+        g.DrawImage(image,new Rectangle(0,GroundY,W,H-GroundY),0,contact,image.Width,image.Height-contact,GraphicsUnit.Pixel,palette);
+        using var quiet=new SolidBrush(Color.FromArgb(52,4,10,18));g.FillRectangle(quiet,0,0,W,H);
+        using var veil=new LinearGradientBrush(new Rectangle(0,330,W,170),Color.Transparent,Color.FromArgb(64,5,9,17),90f);
+        g.FillRectangle(veil,0,330,W,170);
     }
     private void DrawJourneyAtmosphere(Graphics g,int theme)
     {

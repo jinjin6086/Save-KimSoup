@@ -48,7 +48,7 @@ public sealed partial class GamePanel
         float dx=reflected?counterTargetX-x:MathF.Cos(LiveLaserAngle)*1160,dy=reflected?counterTargetY-y:MathF.Sin(LiveLaserAngle)*1160;
         float age=laserTimer,attack=Math.Clamp((age+1)/3,0,1);
         float release=reflected?Math.Clamp((21-age)/6,0,1):Math.Clamp((58-age)/16,0,1);
-        float energy=attack*release,width=reflected?72:menheraMode?84:76;
+        float energy=attack*release,width=(reflected?72:menheraMode?84:76)/3f;
         DrawApotheosisBeam(g,x,y,x+dx,y+dy,width,energy,reflected);
         if(reflected)DrawApotheosisCollision(g,counterTargetX,counterTargetY,energy*.72f);
     }

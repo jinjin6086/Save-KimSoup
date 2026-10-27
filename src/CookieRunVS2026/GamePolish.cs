@@ -65,7 +65,7 @@ public sealed partial class GamePanel
 
     private void ReceiveHit(float damage, string label, Color color, bool unavoidable = false, bool damageOverTime = false)
     {
-        if (activeSkill==ActivePower.Dodge && activeTimer>0 && !isangjinClockDamage) return;
+        if (activeSkill==ActivePower.Dodge && activeTimer>0 && !isangjinClockDamage){TriggerMoonwalkAvoid(bossX);return;}
         if ((!unavoidable && invuln > 0) || hp <= 0) return;
         if(practiceActive)practiceHits++;
         hp = Math.Max(0, hp - damage);
@@ -80,7 +80,8 @@ public sealed partial class GamePanel
             if(!TrySurvive()){state=GameState.GameOver;audio.CancelLaserCharge();audio.Play("down");}
             return;
         }
-        invuln = 32f + guardBonus;
+        // Damage never grants grace frames, in any round. Explicit dodge,
+        // revival and cinematic protections keep their separate existing roles.
         parryCombo = 0; comboTimer = 0;
         int kind = label switch { "충돌"=>1, "장애물"=>2, "화상"=>3, _=>0 };
         Burst(px + PlayerWidth/2, py + PlayerHeight/2, color, 26, kind);
@@ -287,6 +288,7 @@ internal sealed partial class GameAudio : IDisposable
         ApplySoundRemaster();
         ApplyOriginalSkillSounds();
         ApplySfxClarity();
+        PrepareDialogueSounds();
         PrepareSoundResources();
         audioOutput=new SteadyWaveOutput(softwareMixer);
     }

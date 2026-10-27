@@ -5,6 +5,7 @@ internal sealed partial class GameAudio
     private const int SoundVoiceLimit=12;
     private static int SoundPriority(string key)
     {
+        if(key.StartsWith("talk",StringComparison.Ordinal))return 2;
         if(key.StartsWith("clash",StringComparison.Ordinal))return key=="clashtap"?5:7;
         if(key.StartsWith("lasercharge",StringComparison.Ordinal))return 6;
         return key switch
@@ -18,6 +19,7 @@ internal sealed partial class GameAudio
     }
     private static float SoundGain(string key)
     {
+        if(key.StartsWith("talk",StringComparison.Ordinal))return .43f;
         if(key.StartsWith("step",StringComparison.Ordinal))return .26f;
         return key switch
         {
@@ -32,6 +34,7 @@ internal sealed partial class GameAudio
     }
     private static int SoundRepeatInterval(string key)
     {
+        if(key.StartsWith("talk",StringComparison.Ordinal))return 65;
         if(key.StartsWith("lasercharge",StringComparison.Ordinal))return 35;
         if(key.StartsWith("step",StringComparison.Ordinal))return 55;
         return key switch
