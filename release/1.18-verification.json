@@ -1,0 +1,722 @@
+{
+  "mechanics": {
+    "checks": 150,
+    "results": [
+      {
+        "pass": true,
+        "title": "25 high-resolution, aspect-fitted lobby frames"
+      },
+      {
+        "pass": true,
+        "title": "Round 2 HP 15"
+      },
+      {
+        "pass": true,
+        "title": "Round 3 HP 20"
+      },
+      {
+        "pass": true,
+        "title": "Round 4 HP 40"
+      },
+      {
+        "pass": true,
+        "title": "Purgae HP11 remains normal"
+      },
+      {
+        "pass": true,
+        "title": "Purgae HP10 transforms"
+      },
+      {
+        "pass": true,
+        "title": "Purgae crossing HP10 transforms"
+      },
+      {
+        "pass": true,
+        "title": "Rodian HP21 remains normal"
+      },
+      {
+        "pass": true,
+        "title": "Rodian HP20 transforms"
+      },
+      {
+        "pass": true,
+        "title": "Rodian crossing below HP20 transforms"
+      },
+      {
+        "pass": true,
+        "title": "W/E window exactly eight frames"
+      },
+      {
+        "pass": true,
+        "title": "W/E timing edge -8"
+      },
+      {
+        "pass": true,
+        "title": "W/E timing edge 8"
+      },
+      {
+        "pass": true,
+        "title": "W/E timing edge 8.01"
+      },
+      {
+        "pass": true,
+        "title": "Wrong direction fails"
+      },
+      {
+        "pass": true,
+        "title": "Rhythm failure damage remains 3000"
+      },
+      {
+        "pass": true,
+        "title": "Rhythm failure damage only once"
+      },
+      {
+        "pass": true,
+        "title": "Six doubled-speed beats retained"
+      },
+      {
+        "pass": true,
+        "title": "Six correct randomized directional beats succeed"
+      },
+      {
+        "pass": true,
+        "title": "Rhythm success deals exactly one"
+      },
+      {
+        "pass": true,
+        "title": "Success damage only once"
+      },
+      {
+        "pass": true,
+        "title": "Acceleration does not start early"
+      },
+      {
+        "pass": true,
+        "title": "1.3x acceleration every 15 seconds, lasts four"
+      },
+      {
+        "pass": true,
+        "title": "Acceleration ends at four seconds"
+      },
+      {
+        "pass": true,
+        "title": "Player physics remains unaccelerated"
+      },
+      {
+        "pass": true,
+        "title": "Enemy projectile motion accepts accelerated step"
+      },
+      {
+        "pass": true,
+        "title": "Meteor range 350..700 for skin 0, clone False"
+      },
+      {
+        "pass": true,
+        "title": "Real collision uses shared meteor range"
+      },
+      {
+        "pass": true,
+        "title": "Meteor range 350..700 for skin 1, clone False"
+      },
+      {
+        "pass": true,
+        "title": "Real collision uses shared meteor range"
+      },
+      {
+        "pass": true,
+        "title": "Meteor range 350..700 for skin 0, clone True"
+      },
+      {
+        "pass": true,
+        "title": "Real collision uses shared meteor range"
+      },
+      {
+        "pass": true,
+        "title": "Meteor range 350..700 for skin 1, clone True"
+      },
+      {
+        "pass": true,
+        "title": "Real collision uses shared meteor range"
+      },
+      {
+        "pass": true,
+        "title": "Meteor generous reflection remains upward"
+      },
+      {
+        "pass": true,
+        "title": "Visible traveling laser has no early damage"
+      },
+      {
+        "pass": true,
+        "title": "Early kick cannot reflect a distant laser"
+      },
+      {
+        "pass": true,
+        "title": "Unreflected laser deals 2000 on arrival"
+      },
+      {
+        "pass": true,
+        "title": "Laser impact is resolved exactly once"
+      },
+      {
+        "pass": true,
+        "title": "Visible head reflects with Space, cooldown reset"
+      },
+      {
+        "pass": true,
+        "title": "Counter laser reaches boss"
+      },
+      {
+        "pass": true,
+        "title": "Visible head reflects with ShiftKey, cooldown reset"
+      },
+      {
+        "pass": true,
+        "title": "Counter laser reaches boss"
+      },
+      {
+        "pass": true,
+        "title": "Laser five pixels outside displayed box cannot reflect"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "All four laser syllables visible, menhera False"
+      },
+      {
+        "pass": true,
+        "title": "Actual timed sequence hits exactly once, menhera False"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "No pre-arrival damage during actual sequence"
+      },
+      {
+        "pass": true,
+        "title": "All four laser syllables visible, menhera True"
+      },
+      {
+        "pass": true,
+        "title": "Actual timed sequence hits exactly once, menhera True"
+      },
+      {
+        "pass": true,
+        "title": "Cinder still reflects a laser as a laser"
+      },
+      {
+        "pass": true,
+        "title": "Absorption consumes arrived laser without damage"
+      },
+      {
+        "pass": true,
+        "title": "Dodge avoids arrived laser"
+      },
+      {
+        "pass": true,
+        "title": "Chained menhera laser preserves all four syllables"
+      },
+      {
+        "pass": true,
+        "title": "Range display shares upgraded collision rectangle"
+      },
+      {
+        "pass": true,
+        "title": "Safe onboarding freezes health, stage and clear timer"
+      },
+      {
+        "pass": true,
+        "title": "Real jump and landing complete jump lesson"
+      },
+      {
+        "pass": true,
+        "title": "Real airborne second jump completes double-jump lesson"
+      },
+      {
+        "pass": true,
+        "title": "Held slide enters reflection after at least six learning seconds"
+      },
+      {
+        "pass": true,
+        "title": "Missed harmless tutorial bullet retries"
+      },
+      {
+        "pass": true,
+        "title": "Actual tutorial kick sends bullet back and shows success"
+      },
+      {
+        "pass": true,
+        "title": "Q lesson borrows Dodge after reflection"
+      },
+      {
+        "pass": true,
+        "title": "Q lesson uses actual near-hit dodge"
+      },
+      {
+        "pass": true,
+        "title": "Tutorial returns borrowed skill and resumes original stage"
+      },
+      {
+        "pass": true,
+        "title": "Clear time resumes after tutorial"
+      },
+      {
+        "pass": true,
+        "title": "ENTER skip cleans tutorial stage 0"
+      },
+      {
+        "pass": true,
+        "title": "ENTER skip cleans tutorial stage 1"
+      },
+      {
+        "pass": true,
+        "title": "ENTER skip cleans tutorial stage 2"
+      },
+      {
+        "pass": true,
+        "title": "ENTER skip cleans tutorial stage 3"
+      },
+      {
+        "pass": true,
+        "title": "ENTER skip cleans tutorial stage 4"
+      },
+      {
+        "pass": true,
+        "title": "ENTER skip cleans tutorial stage 5"
+      },
+      {
+        "pass": true,
+        "title": "Practice has no mandatory tutorial"
+      },
+      {
+        "pass": true,
+        "title": "S skips opening into first round"
+      },
+      {
+        "pass": true,
+        "title": "S preserves first-round Q reward"
+      },
+      {
+        "pass": true,
+        "title": "S travel skip keeps next boss interaction"
+      },
+      {
+        "pass": true,
+        "title": "S dialogue skip still offers boss mechanics briefing"
+      },
+      {
+        "pass": true,
+        "title": "Second S can leave briefing into combat"
+      },
+      {
+        "pass": true,
+        "title": "S phase skip clears cinematic and phase dialogue"
+      },
+      {
+        "pass": true,
+        "title": "S cannot skip ordinary combat"
+      },
+      {
+        "pass": true,
+        "title": "S cannot bypass final laser QTE"
+      },
+      {
+        "pass": true,
+        "title": "QTE remains ten seconds and seventy presses"
+      },
+      {
+        "pass": true,
+        "title": "70 presses still succeed"
+      },
+      {
+        "pass": true,
+        "title": "QTE success reaches visible post-QTE scene"
+      },
+      {
+        "pass": true,
+        "title": "S ending skip reaches victory screen"
+      }
+    ]
+  },
+  "gpu": {
+    "pass": true,
+    "records": [
+      {
+        "phase": 1,
+        "clock": 130,
+        "image": "01-boss-charge.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 3,
+        "clock": 155,
+        "image": "02-monologue-sweat.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 8,
+        "clock": 180,
+        "image": "03-hero-charge.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 4,
+        "clock": 240,
+        "image": "04-clash-middle.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 4,
+        "clock": 530,
+        "image": "05-clash-pushing.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 90,
+        "image": "06-victory-wide.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 112,
+        "image": "07-impact.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 160,
+        "image": "08-explosion-start.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 196,
+        "image": "09-explosion-full.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "phase": 5,
+        "clock": 316,
+        "image": "10-explosion-tail.png",
+        "width": 1600,
+        "height": 960
+      },
+      {
+        "backend": "Direct3D 11 GPU · NVIDIA GeForce RTX 5060 Ti",
+        "hardware": true
+      },
+      {
+        "frames": 12,
+        "cpuSceneAndSubmitMeanMs": 11.826708333333334,
+        "maxMs": 16.2154,
+        "note": "Hidden-window scene and GPU submission timing, not measured display FPS."
+      },
+      {
+        "pass": true,
+        "detail": "GPU state exits at completion and aftermath renders through existing game scene"
+      }
+    ]
+  },
+  "scope": {
+    "original_assets_identical": 99,
+    "changed_root_files": [
+      "ArenaArt.cs",
+      "BossBriefing.cs",
+      "CHANGELOG_1.18.md",
+      "ClearTimer.cs",
+      "CombatReadability.cs",
+      "CombatRebuild.cs",
+      "CookieRunVS2026.csproj",
+      "FocusedBattle.cs",
+      "FocusHazards.cs",
+      "GamePolish.cs",
+      "IsangjinAcceleration.cs",
+      "IsangjinClock.cs",
+      "LaserRework.cs",
+      "LobbyPresentation.cs",
+      "MeteorForgiveness.cs",
+      "ParryTutorial.cs",
+      "PracticeMode.cs",
+      "PremiumPresentation.cs",
+      "Program.cs",
+      "README.md",
+      "StorySkip.cs"
+    ]
+  }
+}

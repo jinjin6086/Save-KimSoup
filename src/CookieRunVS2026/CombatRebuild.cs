@@ -163,7 +163,7 @@ public sealed partial class GamePanel
             using var wave=new Pen(Color.FromArgb((int)(180*(1-progress)),Mint),6*(1-progress)+1);
             float r=30+progress*440;g.DrawEllipse(wave,px+26-r,py+38-r,r*2,r*2);
         }
-        if(warningTimer>0&&!MelodySequenceActive&&!(TruePurgaeEncounter&&trueStopPhase!=0))
+        if(warningTimer>0&&!RoundOneOnboardingActive&&!MelodySequenceActive&&!(TruePurgaeEncounter&&trueStopPhase!=0))
         {
             Color color=Paper;
             using var shade=new SolidBrush(Color.FromArgb(130,9,15,27));g.FillRoundRectangle(shade,new Rectangle(225,113,550,43),12,12);

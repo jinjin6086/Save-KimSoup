@@ -31,7 +31,7 @@ public sealed class GameForm : Form
 
     public GameForm()
     {
-        Text = "승쿠런 1.17 버전";
+        Text = "승쿠런 1.18 버전";
         ClientSize = new Size(BaseWidth, BaseHeight);
         MinimumSize = new Size(900, 540);
         FormBorderStyle = FormBorderStyle.None;
@@ -572,6 +572,7 @@ public sealed partial class GamePanel : Panel
 
     private void StartRound(int newRound)
     {
+        RestoreTutorialSkill();
         ResetStoryJourney();storyDefeatDone=false;
         PrepareCheckpoint();
         state = GameState.Round;
@@ -669,8 +670,6 @@ public sealed partial class GamePanel : Panel
 
     private void UpdateRound1(float step)
     {
-        if(!practiceActive&&roundOneParryPhase==0&&frame>=360)
-        {BeginRoundOneParryTutorial();return;}
         if (frame >= 1080)
         {
             BeginFirstGateStory();
@@ -851,7 +850,7 @@ public sealed partial class GamePanel : Panel
             if(melodyWordTimer<=0)
             {
                 if(melodyStep==3&&MelodyLaserApproaching)
-                {TriggerMelodyFinale();FinishMelodyBurstBeat();}
+                {melodyWordTimer=0;} // Resolve after the player's movement, using the visible swept head.
                 else
                 {
                     AnnounceMelodyWord(melodyStep);
@@ -874,17 +873,15 @@ public sealed partial class GamePanel : Panel
 
     private void StartMelodySequence()
     {
-        melodyLaserInFlight=false;
-        bool followup=menheraMode&&melodyBurstActive&&melodyBurstRemaining<melodyBurstTotal;
+        melodyLaserInFlight=false;melodyLaserResolved=false;
         BeginMelodyBurst();
         hasGate=false;
         for (int i=0;i<melodyGaps.Length;i++) melodyGaps[i] = menheraMode?rng.Next(26,47):rng.Next(MelodyMinGap, MelodyMaxGap+1);
-        melodyStep = followup?3:0;
-        melodyInterval = followup?rng.Next(28,43):melodyGaps[0];
-        melodyWordTimer = followup?melodyInterval:0;
-        if(followup)BeginMelodyLaserApproach();
+        melodyStep = 0;
+        melodyInterval = melodyGaps[0];
+        melodyWordTimer = 0;
         bossShoutTimer = 45;
-        if(!followup)bossMessage = MelodyWords[0];
+        bossMessage = MelodyWords[0];
         flashTimer = 6;
     }
 
@@ -896,8 +893,10 @@ public sealed partial class GamePanel : Panel
         flashTimer = stepIndex == 3 ? 14 : 5;
     }
 
-    private void TriggerMelodyFinale()
+    private void TriggerMelodyFinale(bool reflected)
     {
+        if(!melodyLaserInFlight||melodyLaserResolved)return;
+        melodyLaserResolved=true;
         bossMessage = "돼!";
         bossShoutTimer = 70;
         TriggerScreenFlash(18);
@@ -905,9 +904,9 @@ public sealed partial class GamePanel : Panel
         StartUltimateLaser();
 
         // Resolve when the visible beam reaches the kick range or its gauge ends.
-        if (activeTimer>0 && activeSkill==ActivePower.Absorb && !ParryActive)
+        if (activeTimer>0 && activeSkill==ActivePower.Absorb && !reflected)
         { absorbedCount=Math.Min(12,absorbedCount+3);laserActive=false;audio.Play("absorb");return; }
-        if (ParryActive)
+        if (reflected)
         {
             // A beam clash keeps its laser counter even during Cinder.
             laserReflected=true;BeginLaserCounter();
@@ -1386,6 +1385,7 @@ public sealed partial class GamePanel : Panel
     public void HandleKeyDown(KeyEventArgs e)
     {
         if (!heldKeys.Add(e.KeyCode)) return;
+        if(!gamePaused&&e.KeyCode==Keys.S&&TrySkipStory())return;
         if(state==GameState.StoryScene&&e.KeyCode is not(Keys.Escape or Keys.M or Keys.P)){if(!gamePaused)HandleStoryJourneyKey(e.KeyCode);return;}
         if(HandlePracticeKey(e.KeyCode))return;
         if (e.KeyCode == Keys.P && (state==GameState.Round || state==GameState.RoundTransition || state==GameState.StoryScene)) { SetPaused(!gamePaused); return; }
@@ -1695,7 +1695,7 @@ public sealed partial class GamePanel : Panel
             using SolidBrush fade = new(Color.FromArgb((int)(255 * sceneFadeTimer / SceneFadeFrames), Ink));
             g.FillRectangle(fade, 0, 0, W, H);
         }
-        if(!trueStopCapturingBase)DrawPause(g);
+        if(!trueStopCapturingBase){DrawStorySkipHint(g);DrawPause(g);}
     }
 
 

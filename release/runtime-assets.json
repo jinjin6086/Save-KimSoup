@@ -1,6 +1,5 @@
 {
-  "version": "1.17",
-  "source": "Release ZIP",
+  "version": "1.18",
   "files": [
     {
       "path": "Assets/Audio/CC0-KARORYFER-VOCAL-LICENSE.txt",
@@ -378,14 +377,49 @@
       "sha256": "a9c34c4944028dcbadf3c0cf97b8447f46df55bcae90f0ec348f4da685582d4e"
     },
     {
+      "path": "Assets/PurgaeAscendedMotion8.png",
+      "bytes": 3189528,
+      "sha256": "1594b62a62db087a9e6e0724d8287fd85f44cbfce5cc1011e57b905b940fe2d2"
+    },
+    {
+      "path": "Assets/PurgaeAscendedTweenAtlas.png",
+      "bytes": 28162882,
+      "sha256": "ed4dd804545a4383edfd86240e642943c791a8942455d453d587da308bd25f84"
+    },
+    {
       "path": "Assets/PurgaeNormalFrames.paf",
       "bytes": 19785433,
       "sha256": "cfa289ea0f488177123d189599b0aa7bb6001ad0c865f3e0f7fb90999f8735c6"
     },
     {
+      "path": "Assets/PurgaeNormalMotion8.png",
+      "bytes": 3213105,
+      "sha256": "8d00bcdb885431e9181701d5e78ef54854b725b6586981629aaa4c267de64a6e"
+    },
+    {
+      "path": "Assets/PurgaeNormalTweenAtlas.png",
+      "bytes": 26056735,
+      "sha256": "b8e8af7abfae6f6416574b7a6031d1cb446821027cbac6c5adbebdb8903536fb"
+    },
+    {
+      "path": "Assets/PurgaeOrbAtlas.png",
+      "bytes": 2001772,
+      "sha256": "dbf474f3b52228577347fd8ac651ef9dd712d1267a51a4e4ab5158fa276cd99d"
+    },
+    {
       "path": "Assets/PurgaeRageFrames.paf",
       "bytes": 21505827,
       "sha256": "115d5bd05889d078a72062f201e21814e54dab9c9f88cc2abdfdb71e786639d1"
+    },
+    {
+      "path": "Assets/PurgaeRageMotion8.png",
+      "bytes": 3280170,
+      "sha256": "53ba9f6539f8a7f93c02a2c40e3b56cc4246152af4d8f9a63c46efb37da74b90"
+    },
+    {
+      "path": "Assets/PurgaeRageTweenAtlas.png",
+      "bytes": 28247694,
+      "sha256": "b1f117e73744451f8beafacd298107716133ba64d63b5c250c1a72f68d4b9010"
     },
     {
       "path": "Assets/PurgaeShinyOrbs.paf",
@@ -462,7 +496,5 @@
       "bytes": 2261362,
       "sha256": "9c8eefb6084dbc075d2102d89e672ff505fc0e2eac37b9b902d72038628cf918"
     }
-  ],
-  "scope": "Historical original home-PC 1.17 assets only",
-  "recovery_manifest": "The recovery ZIP has its own asset manifest: 자원 목록.json"
+  ]
 }

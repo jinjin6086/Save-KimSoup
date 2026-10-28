@@ -4,7 +4,7 @@ namespace CookieRunVS2026;
 
 public sealed partial class GamePanel
 {
-    private bool melodyLaserInFlight;
+    private bool melodyLaserInFlight,melodyLaserResolved;
     private PointF melodyLaserOrigin,melodyLaserPreviousTip;
     private bool MelodyLaserApproaching=>melodyLaserInFlight&&round==4&&MelodySequenceActive&&melodyStep==3&&!laserActive;
     private float MelodyLaserProgress=>Math.Clamp(1-melodyWordTimer/Math.Max(1,melodyInterval),0,1);
@@ -13,7 +13,7 @@ public sealed partial class GamePanel
 
     private void BeginMelodyLaserApproach()
     {
-        melodyLaserInFlight=true;melodyLaserOrigin=new(bossX+65,bossY+65);
+        melodyLaserInFlight=true;melodyLaserResolved=false;melodyLaserOrigin=new(bossX+65,bossY+65);
         laserContactX=px+PlayerWidth*.5f;laserContactY=py+31;
         melodyLaserPreviousTip=melodyLaserOrigin;
         bossMessage="돼!";bossShoutTimer=melodyInterval+24;
@@ -25,18 +25,22 @@ public sealed partial class GamePanel
         // Follow the runner during the approach, then use the actual swept head
         // against the same kick box shown by the persistent range indicator.
         laserContactX=px+PlayerWidth*.5f;laserContactY=py+31;
-        if(!ParryActive)return;
-        var zone=KickHitBox;zone.Inflate(10,10);
+        var zone=KickHitBox;
         PointF tip=MelodyLaserTip;
-        if(!SegmentTouchesRectangle(melodyLaserPreviousTip.X,melodyLaserPreviousTip.Y,tip.X,tip.Y,zone))return;
-        TriggerMelodyFinale();FinishMelodyBurstBeat();
+        bool reflect=ParryActive&&SegmentTouchesRectangle(melodyLaserPreviousTip.X,melodyLaserPreviousTip.Y,tip.X,tip.Y,zone);
+        if(!reflect&&MelodyLaserProgress<1)return;
+        TriggerMelodyFinale(reflect);FinishMelodyBurstBeat();
     }
     private void DrawApproachingMelodyLaser(Graphics g)
     {
         if(!MelodyLaserApproaching)return;
         PointF tip=MelodyLaserTip;
+        using(var guide=new Pen(Color.FromArgb(38,ClashPink),1))
+            g.DrawLine(guide,melodyLaserOrigin,new PointF(laserContactX,laserContactY));
         DrawApotheosisBeam(g,melodyLaserOrigin.X,melodyLaserOrigin.Y,tip.X,tip.Y,(menheraMode?84:76)/3f,.9f,false);
         DrawLaserBloom(g,tip.X,tip.Y,16,13,ClashPink,.7f);
+        using var head=new SolidBrush(Color.FromArgb(245,255,236,250));
+        g.FillEllipse(head,tip.X-3.5f,tip.Y-3.5f,7,7);
     }
     // Reserve the end of the final syllable for the laser. A nearby note may
     // still hit, but cannot spend the player's reflection window before it.
@@ -69,7 +73,7 @@ public sealed partial class GamePanel
             float x=cx+MathF.Cos(a)*r,y=cy+MathF.Sin(a)*r*.65f;
             g.DrawLine(ParticlePen(c,(int)(170*t*p),1),x,y,x+MathF.Cos(a)*6,y+MathF.Sin(a)*4);
         }
-        if(MelodyLaserApproaching&&melodyWordTimer<=12)
+        if(MelodyLaserApproaching)
         {
             using var trace=new Pen(Color.FromArgb((int)(110+t*90),c),1.3f){DashStyle=DashStyle.Dash};
             g.DrawLine(trace,cx,cy,px+26,py+32);

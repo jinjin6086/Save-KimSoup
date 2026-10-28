@@ -16,7 +16,7 @@ public sealed partial class GamePanel
         RectangleF range=KickHitBox;
         // A quiet one-pixel boundary, using the real upgraded kick geometry.
         using var fill=new SolidBrush(Color.FromArgb(3,Gold));
-        using var edge=new Pen(Color.FromArgb(ParryActive?82:parryCooldown>0?27:40,Gold),1);
+        using var edge=new Pen(Color.FromArgb(ParryActive?82:40,Gold),1);
         g.FillRectangle(fill,range);
         g.DrawRectangle(edge,range.X,range.Y,range.Width,range.Height);
     }

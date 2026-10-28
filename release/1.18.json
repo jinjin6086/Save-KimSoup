@@ -1,0 +1,31 @@
+{
+  "sequence": 18,
+  "version": "1.18",
+  "file": "승쿠런 1.18 버전.zip",
+  "source": "onboarding118-preview-20261028",
+  "sha256": "9f37597e9b8a025c1112b35f650ae89965b5946c09f0a1b6cdd76887ef6e2621",
+  "exe_sha256": "7b015565caaaaebef808bfa7047a71766e2340930f9b773fdb8900cc4ade105c",
+  "bytes": 424377665,
+  "note": "원본1.17 Assets 보존. HP15/20/40, W/E±8, 적가속1.3, 메테오350~700, 접근형 일반 레이저, 실제 반사범위, 첫 라운드 조작 학습, S 스토리 스킵. QTE10초70회 유지.",
+  "self_contained": true,
+  "architecture": "win-x64",
+  "bundle_major": 6,
+  "bundled_dll_sha256": "cbaec626f4d964348b7fdcf338943261939c30f48557c47dcdf8c145344b24cc",
+  "included_frameworks": [
+    {
+      "name": "Microsoft.NETCore.App",
+      "version": "10.0.12"
+    },
+    {
+      "name": "Microsoft.WindowsDesktop.App",
+      "version": "10.0.12"
+    }
+  ],
+  "original_assets_verified": 99,
+  "automated_checks": 150,
+  "windows_manual_launch": "Verified packaged EXE 1.18.0.0 starts and renders the lobby; full manual playthrough not performed",
+  "github_release_upload": "blocked_browser_saved_permission",
+  "notion": "updated; download remains public1.17 until upload",
+  "gpu_qte_hardware_verified": true,
+  "gpu_post_qte_scene_visible": true
+}

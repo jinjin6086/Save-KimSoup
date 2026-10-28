@@ -65,6 +65,7 @@ public sealed partial class GamePanel
 
     private void ReceiveHit(float damage, string label, Color color, bool unavoidable = false, bool damageOverTime = false)
     {
+        if(RoundOneOnboardingActive)return;
         if (activeSkill==ActivePower.Dodge && activeTimer>0 && !isangjinClockDamage){TriggerMoonwalkAvoid(bossX);return;}
         if ((!unavoidable && invuln > 0) || hp <= 0) return;
         if(practiceActive)practiceHits++;

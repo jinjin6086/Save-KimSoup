@@ -217,7 +217,7 @@ public sealed partial class GamePanel
         DrawCadence(g);
         // Keep skill status in the free row above the controls. Mechanic
         // banners and time-stop instructions retain their full upper area.
-        DrawCinderStatus(g);DrawFocusStatus(g);
+        DrawCinderStatus(g);DrawFocusStatus(g);DrawRoundOneParryTutorial(g);
     }
     private void PremiumTitle(Graphics g)
     {

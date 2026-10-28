@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <Version>1.17.0</Version><AssemblyVersion>1.17.0.0</AssemblyVersion>
-    <FileVersion>1.17.0.0</FileVersion><InformationalVersion>1.17</InformationalVersion>
-    <AssemblyTitle>승쿠런 1.17 버전</AssemblyTitle><Product>김스프를 구해라</Product>
+    <Version>1.18.0</Version><AssemblyVersion>1.18.0.0</AssemblyVersion>
+    <FileVersion>1.18.0.0</FileVersion><InformationalVersion>1.18</InformationalVersion>
+    <AssemblyTitle>승쿠런 1.18 버전</AssemblyTitle><Product>김스프를 구해라</Product>
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
