@@ -2,6 +2,8 @@
 
 공격을 발차기로 반사하며 김스프를 구하러 떠나는 Windows 횡스크롤 액션 게임입니다. 최신 개발 내용은 **승쿠런 1.17**이며, 현재 GitHub 공개 실행 ZIP은 **1.16**입니다.
 
+프로젝트 노션: [김스프를 구해라](https://app.notion.com/p/38f8d2ee0ba8808da5ced14b4ece60f3)
+
 ## 바로 플레이하기
 
 **[GitHub 공개 실행용 ZIP: 승쿠런 1.16](https://github.com/jinjin6086/Save-KimSoup/releases/tag/v1.16)**
@@ -65,3 +67,7 @@ dotnet run --project src/CookieRunVS2026/CookieRunVS2026.csproj -c Release
 - [전체 변경 내역](release/1.17-recovery.md) · [재구성 빌드 메타데이터](release/1.17-recovery.json) · [기존 1.17 패치 정보](release/1.17.json) · [난이도 검토](release/1.17-difficulty.md).
 - 재구성 ZIP: `SeungKuRun-1.17-Windows-x64.zip` (328,141,287 bytes).
 - SHA-256: `866ef909a9c9e6a3000cebb51abaf456ebdf57cdd18d84b4558c08fab71d7c31`.
+
+## 노션 업데이트 원고
+
+[게임 노션 1.17 반영 원고](release/notion-1.17-update.md)를 준비했습니다. 지정된 노션 페이지에 실제 반영 완료된 기록은 아닙니다.
