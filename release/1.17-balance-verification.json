@@ -1,6 +1,6 @@
 {
-  "scope": "Current meteor source plus extracted actual collision, hit, rhythm-key and rhythm-failure methods; graphics/audio stubbed; no Windows GUI exercised",
-  "checks": 27,
+  "scope": "Current meteor source plus extracted actual collision, hit, rhythm-key and rhythm-failure and boss-hit/armor methods plus startup health assignment; graphics/audio and phase/defeat effects stubbed; no Windows GUI exercised",
+  "checks": 34,
   "passed": [
     "Player 0, clone False: 50% endpoint",
     "Player 0, clone False: 100% endpoint",
@@ -28,6 +28,13 @@
     "Rhythm outside window still fails at 8.01 frames",
     "Wrong rhythm key still fails",
     "Escape is not treated as a rhythm mistake",
-    "Six edge-window hits complete the rhythm"
+    "Six edge-window hits complete the rhythm",
+    "Isangjin remains alive at 1 of 15 HP",
+    "Isangjin defeated at 15 damage",
+    "Purgae does not enrage above 10 HP",
+    "Purgae enrages at exactly 10 HP",
+    "Enraged Purgae retains half-damage armor without retrigger",
+    "Purgae crossing below 10 HP still enrages",
+    "Purgae lethal hit defeats without starting an enrage"
   ]
 }

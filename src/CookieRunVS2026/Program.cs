@@ -628,8 +628,8 @@ public sealed partial class GamePanel : Panel
         bossDamage = 0f;
         bossHitRequired = newRound switch
         {
-            2 => 25, // 이상진
-            3 => 30, // 파괴옥
+            2 => 15, // 이상진
+            3 => 20, // 파괴옥 · 남은 체력 10에서 광폭화
             4 => 40, // 강로디언
             5 => 20, // 종결 보스
             _ => 0
