@@ -4,10 +4,10 @@ public sealed partial class GamePanel
 {
     private float IncomingProjectileDamage(Projectile projectile)
     {
-        // Only round-three Purgae meteors scale with the current player's max HP.
-        // Resolve on contact so a clone uses its reduced max HP, not its old body.
+        // Round-three Purgae meteors roll 50..100% of their 700 base damage.
+        // Player/clone maximum health does not change the 350..700 damage range.
         return round==3&&projectile.Type==AttackType.Meteor
-            ?PlayerMaxHealth*rng.Next(50,101)/100f:projectile.Damage;
+            ?PurgaeSkill1MeteorDamage*rng.Next(50,101)/100f:projectile.Damage;
     }
 
     private static RectangleF ProjectileDamageBounds(Projectile p)=>p.Type==AttackType.Meteor

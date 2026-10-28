@@ -119,17 +119,17 @@ public sealed partial class GamePanel
     }
     private void DrawFocusLaserHazard(Graphics g)
     {
-        bool charge=MelodySequenceActive&&melodyStep==3&&!laserActive;
+        bool charge=MelodyLaserApproaching;
         if(!laserActive&&!charge)return;
         bool reflected=laserActive&&laserReflected;
-        PointF start=reflected?new(counterOriginX,counterOriginY):new(bossX+65,bossY+65);
+        PointF start=charge?melodyLaserOrigin:reflected?new(counterOriginX,counterOriginY):new(bossX+65,bossY+65);
         PointF end;
-        if(charge)end=new(px+PlayerWidth*.5f,py+PlayerHeight*.5f);
+        if(charge)end=MelodyLaserTip;
         else if(reflected)end=new(counterTargetX,counterTargetY);
         else end=new(start.X+MathF.Cos(LiveLaserAngle)*1160,start.Y+MathF.Sin(LiveLaserAngle)*1160);
         float dx=end.X-start.X,dy=end.Y-start.Y,length=Math.Max(1,MathF.Sqrt(dx*dx+dy*dy));
         float nx=-dy/length,ny=dx/length,halfWidth=charge?5:reflected?9.5f:menheraMode?12.1667f:10.8333f;
-        Color c=reflected?Color.FromArgb(178,255,231):charge?FocusGuide:FocusDanger;
+        Color c=reflected?Color.FromArgb(178,255,231):FocusDanger;
         float opacity=charge?1:reflected?Math.Clamp((21-laserTimer)/6,0,1):Math.Clamp((58-laserTimer)/16,0,1);
         using var path=new GraphicsPath();path.AddLines(new[]{new PointF(start.X+nx*halfWidth,start.Y+ny*halfWidth),new PointF(end.X+nx*halfWidth,end.Y+ny*halfWidth),new PointF(end.X-nx*halfWidth,end.Y-ny*halfWidth),new PointF(start.X-nx*halfWidth,start.Y-ny*halfWidth)});path.CloseFigure();
         using var fill=new SolidBrush(Color.FromArgb((int)(16*opacity),c));g.FillPath(fill,path);
@@ -137,7 +137,7 @@ public sealed partial class GamePanel
         using var aim=new Pen(Color.FromArgb((int)(180*opacity),c),.8f){DashStyle=DashStyle.Dash};g.DrawLine(aim,start,end);
         PointF contact=reflected?end:charge?end:new(laserContactX,laserContactY);
         FocusHazardBox(g,new(contact.X-13,contact.Y-17,26,34),!charge,opacity);
-        if(charge)Label(g,"돼! 순간에 발차기",new(px-70,py-68,200,25),13,FocusGuide);
+        if(charge)Label(g,"레이저가 범위에 닿으면 발차기",new(px-100,py-68,260,25),11,FocusGuide);
         else if(reflected)Label(g,"레이저 반사",new(px-38,py-47,180,23),12,c);
     }
 }

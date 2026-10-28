@@ -10,6 +10,17 @@ public sealed partial class GamePanel
     private readonly ColorMatrix readableMatrix=new();
     private bool worldMirroring;
 
+    private void DrawPersistentParryRange(Graphics g)
+    {
+        if(state!=GameState.Round||PhaseIntroActive||bossBriefingActive||FocusWireframeActive)return;
+        RectangleF range=KickHitBox;
+        // A quiet one-pixel boundary, using the real upgraded kick geometry.
+        using var fill=new SolidBrush(Color.FromArgb(3,Gold));
+        using var edge=new Pen(Color.FromArgb(ParryActive?82:parryCooldown>0?27:40,Gold),1);
+        g.FillRectangle(fill,range);
+        g.DrawRectangle(edge,range.X,range.Y,range.Width,range.Height);
+    }
+
     private Bitmap ReadableSprite(Image source,Color color)
     {
         var key=(source,color.ToArgb());

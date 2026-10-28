@@ -30,7 +30,7 @@ public sealed partial class GamePanel
         menheraMode=true;menheraIntro=0;
         BeginPhaseIntro(2);
         bossMessage="가질 수 없다면 부숴버리겠어..";bossShoutTimer=170;
-        dashActive=false;laserActive=false;melodyStep=-1;hasGate=false;
+        dashActive=false;laserActive=false;melodyLaserInFlight=false;melodyStep=-1;hasGate=false;
         pendingMenheraCleanup=true;obstacles.Clear();risingObstacles.Clear();
         attackTimer=0;dashCooldown=180;melodySequenceCooldown=100;obstacleSpawnTimer=35;
         audio.CancelLaserCharge();audio.Play("menhera");

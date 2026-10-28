@@ -66,7 +66,7 @@ public sealed partial class GamePanel
         SetPaused(false);
         resonance=0;skillFxTimer=perfectFxTimer=shockCooldown=gateTimer=encounterTime=incomingWarning=0;
         hasGate=false;gateCooldown=round==2?390:690;
-        warningTimer=165;encounterMessage=round switch{1=>"↑  두 번 점프  ·  ↓  슬라이드",2=>"날아오는 탄환을 반사하세요",3=>"초록 구슬 → 각성 후 화상",5=>"바닥·붉은 줄은 피하세요",_=>"‘돼!’에 맞춰 레이저를 반사하세요"};
+        warningTimer=165;encounterMessage=round switch{1=>"↑  두 번 점프  ·  ↓  슬라이드",2=>"날아오는 탄환을 반사하세요",3=>"초록 구슬 → 각성 후 화상",5=>"바닥·붉은 줄은 피하세요",_=>"날아오는 레이저가 금색 범위에 닿으면 발차기"};
         parrySlices.Clear();bossRecoil=0;ResetKickCombat();
         if(newRun){resonanceGain=1;guardBonus=shockwavePower=0;augmentBag.Clear();}
     }

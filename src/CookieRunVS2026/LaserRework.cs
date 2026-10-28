@@ -4,9 +4,43 @@ namespace CookieRunVS2026;
 
 public sealed partial class GamePanel
 {
+    private bool melodyLaserInFlight;
+    private PointF melodyLaserOrigin,melodyLaserPreviousTip;
+    private bool MelodyLaserApproaching=>melodyLaserInFlight&&round==4&&MelodySequenceActive&&melodyStep==3&&!laserActive;
+    private float MelodyLaserProgress=>Math.Clamp(1-melodyWordTimer/Math.Max(1,melodyInterval),0,1);
+    private PointF MelodyLaserTip=>new(melodyLaserOrigin.X+(laserContactX-melodyLaserOrigin.X)*MelodyLaserProgress,
+        melodyLaserOrigin.Y+(laserContactY-melodyLaserOrigin.Y)*MelodyLaserProgress);
+
+    private void BeginMelodyLaserApproach()
+    {
+        melodyLaserInFlight=true;melodyLaserOrigin=new(bossX+65,bossY+65);
+        laserContactX=px+PlayerWidth*.5f;laserContactY=py+31;
+        melodyLaserPreviousTip=melodyLaserOrigin;
+        bossMessage="돼!";bossShoutTimer=melodyInterval+24;
+        audio.CancelLaserCharge();audio.Play("beam");
+    }
+    private void TryReflectApproachingMelodyLaser()
+    {
+        if(!MelodyLaserApproaching)return;
+        // Follow the runner during the approach, then use the actual swept head
+        // against the same kick box shown by the persistent range indicator.
+        laserContactX=px+PlayerWidth*.5f;laserContactY=py+31;
+        if(!ParryActive)return;
+        var zone=KickHitBox;zone.Inflate(10,10);
+        PointF tip=MelodyLaserTip;
+        if(!SegmentTouchesRectangle(melodyLaserPreviousTip.X,melodyLaserPreviousTip.Y,tip.X,tip.Y,zone))return;
+        TriggerMelodyFinale();FinishMelodyBurstBeat();
+    }
+    private void DrawApproachingMelodyLaser(Graphics g)
+    {
+        if(!MelodyLaserApproaching)return;
+        PointF tip=MelodyLaserTip;
+        DrawApotheosisBeam(g,melodyLaserOrigin.X,melodyLaserOrigin.Y,tip.X,tip.Y,(menheraMode?84:76)/3f,.9f,false);
+        DrawLaserBloom(g,tip.X,tip.Y,16,13,ClashPink,.7f);
+    }
     // Reserve the end of the final syllable for the laser. A nearby note may
     // still hit, but cannot spend the player's reflection window before it.
-    private bool LaserPriorityWindow=>round==4&&!laserActive&&MelodySequenceActive&&melodyStep==3&&melodyWordTimer>0&&melodyWordTimer<=12;
+    private bool LaserPriorityWindow=>MelodyLaserApproaching&&melodyWordTimer>0&&melodyWordTimer<=12;
     private float slideAudioClock;
     private bool slideSoundActive;
     private void UpdateSlideSound(float step)
@@ -35,11 +69,11 @@ public sealed partial class GamePanel
             float x=cx+MathF.Cos(a)*r,y=cy+MathF.Sin(a)*r*.65f;
             g.DrawLine(ParticlePen(c,(int)(170*t*p),1),x,y,x+MathF.Cos(a)*6,y+MathF.Sin(a)*4);
         }
-        if(melodyWordTimer<=12)
+        if(MelodyLaserApproaching&&melodyWordTimer<=12)
         {
             using var trace=new Pen(Color.FromArgb((int)(110+t*90),c),1.3f){DashStyle=DashStyle.Dash};
             g.DrawLine(trace,cx,cy,px+26,py+32);
-            Label(g,"돼! 에 맞춰 발차기",new(px-67,py-65,190,24),12,Paper);
+            Label(g,"레이저가 범위에 닿으면 발차기",new(px-97,py-65,250,24),11,Paper);
         }
     }
     private void DrawGrandLaser(Graphics g,bool reflected)

@@ -29,18 +29,19 @@ public sealed partial class GamePanel
         3=>new[]{
             new BriefingRule("돌덩이 · 화염구 · 구슬 반사","공격이 가까워지면 발차기로 보스에게 돌려주세요.","SPACE",BriefingReflect),
             new BriefingRule("광폭화 후 붉은 구슬 주의","맞으면 화상을 입습니다. 반사하거나 피하세요.","주의",BriefingEvade),
-            new BriefingRule("집중 메테오는 위로 반사","피격: 최대 체력 50~100%. 반사 시 보스 피해 없음.","SPACE",BriefingReflect),
+            new BriefingRule("집중 메테오는 위로 반사","기준 피해 700의 50~100%: 350~700 피해.","SPACE",BriefingReflect),
             new BriefingRule("광폭화 중 보스 피해 50% 감소","5회 명중할 때마다 방어가 5초 동안 사라집니다.","5회",BriefingReflect)},
         4=>new[]{
             new BriefingRule("음표는 발차기로 반사","대사를 외우는 동안에도 음표가 계속 날아옵니다.","SPACE",BriefingReflect),
-            new BriefingRule("탈·덕·안·돼! 마지막 박자 반사","마지막 ‘돼!’에 맞춰 발차기하면 레이저를 반사합니다.","돼!",BriefingReflect),
+            new BriefingRule("돼! 게이지와 함께 날아오는 레이저","레이저 앞부분이 금색 범위에 닿으면 발차기로 반사.","SPACE",BriefingReflect),
             new BriefingRule("빨간 직선 돌진은 반사 불가","경고선을 보고 점프·슬라이드로 회피. 피해 1,000.","↑ / ↓",BriefingEvade),
+            new BriefingRule("남은 체력 20에서 멘헤라","최대 체력 40의 절반에서 패턴이 강화됩니다.","HP 20",BriefingEvade),
             new BriefingRule("체력 1 미만이면 최후발악","슬로우 레이저 뒤 SPACE 연타. 10초 안에 70회로 반격.","SPACE",BriefingReflect)},
         5=>CreateFinalBriefingRules(),
         _=>new[]{
             new BriefingRule("바닥 장애물","위쪽 방향키로 뛰어넘으세요.","↑",BriefingMove),
             new BriefingRule("떠 있는 장애물","아래쪽 방향키를 누른 채로 지나가세요.","↓",BriefingMove),
-            new BriefingRule("발차기","SPACE 또는 SHIFT로 적 공격을 반사합니다.","SPACE",BriefingReflect),
+            new BriefingRule("이상진의 흔적 · 패링 연습","검은 탄환이 연한 금색 범위에 들어오면 발차기.","SPACE",BriefingReflect),
             new BriefingRule("체력 관리","반사한 공격이 보스에게 맞으면 체력 5% 회복.","5%",BriefingReflect)}
     };
     private BriefingRule[] CreateFinalBriefingRules()
@@ -114,7 +115,7 @@ public sealed partial class GamePanel
     }
     private void DrawBriefingRule(Graphics g,BriefingRule rule,int index)
     {
-        bool compact=briefingRound==2;
+        bool compact=briefingRound is 2 or 4;
         float x=367,y=155+index*(compact?65:82);
         PanelSurface(g,new(x,y,589,compact?60:76),Gold);
         using(var edge=new Pen(Color.FromArgb(158,rule.Color),2))g.DrawLine(edge,x+1,y+12,x+1,y+(compact?48:61));

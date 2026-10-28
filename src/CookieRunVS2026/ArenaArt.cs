@@ -200,6 +200,7 @@ public sealed partial class GamePanel
         if(augmentFlashTimer>0&&!string.IsNullOrWhiteSpace(augmentNotice))Label(g,augmentNotice,new(380,85,590,25),12,Paper);
         DrawResonanceMeter(g);
         DrawCadence(g);
+        DrawRoundOneParryTutorial(g);
     }
 
     private void DrawCadence(Graphics g)
@@ -207,12 +208,12 @@ public sealed partial class GamePanel
         if(round!=4||!MelodySequenceActive)return;
         float progress=1-Math.Clamp(melodyWordTimer/Math.Max(1,melodyInterval),0,1);
         if(melodyBurstActive)Label(g,$"연속 {melodyBurstTotal-melodyBurstRemaining+1} / {melodyBurstTotal}",new(360,269,280,25),12,Coral);
-        bool last=melodyStep==3;
+        bool last=MelodyLaserApproaching;
         Color color=last?Paper:Accent(4);
         Label(g,bossMessage,new(360,107,280,66),last?46:34,color);
         using var track=new Pen(Color.FromArgb(45,color),2);g.DrawEllipse(track,457,179,86,86);
         using var timer=new Pen(color,3);g.DrawArc(timer,457,179,86,86,-90,359*progress);
-        Label(g,last?"발차기":"듣기",new(462,202,76,35),14,color);
+        Label(g,last?"반사":"듣기",new(462,202,76,35),14,color);
         if(last)
         {
             float radius=30+(1-progress)*64;

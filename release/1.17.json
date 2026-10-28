@@ -33,10 +33,10 @@
   "recovery_build": {
     "metadata": "release/1.17-recovery.json",
     "changelog": "release/1.17-recovery.md",
-    "version": "1.17-recovery.accel.20261028",
+    "version": "1.17-recovery.readability.20261028",
     "file": "SeungKuRun-1.17-Windows-x64.zip",
-    "bytes": 328142649,
-    "sha256": "6d7cc0653e87575efdb34086748612765f51bec72a25575c2317f0cffae6d056",
+    "bytes": 328145355,
+    "sha256": "ed9be4a24a531b0caec24e3845fc9f49838791b5ae1078ddef2b8b62bc10d903",
     "github_release_asset_uploaded": false
   }
 }

@@ -485,6 +485,7 @@ public sealed partial class GamePanel : Panel
 
         if (state != GameState.Round)
             return;
+        if(UpdateRoundOneParryTutorial(step)){audio.Collect();return;}
         if(round==4&&menheraIntro>0){frame+=step;UpdatePlayer(step);return;}
 
         UpdateIsangjinAcceleration(step);
@@ -558,6 +559,7 @@ public sealed partial class GamePanel : Panel
         if (state != GameState.Round || PhaseIntroActive || TruePurgaeTimeFrozen) return;
 
         UpdatePlayer(step);
+        TryReflectApproachingMelodyLaser();
         if(laserActive&&laserReflected){counterOriginX=px+50;counterOriginY=py+31;counterTargetX=bossX+65;counterTargetY=bossY+65;}
         UpdateObjects(enemyStep);
         UpdateRisingObstacles(enemyStep);
@@ -575,6 +577,7 @@ public sealed partial class GamePanel : Panel
         state = GameState.Round;
         audio.CancelLaserCharge();
         round = newRound;
+        ResetRoundOneParryTutorial();melodyLaserInFlight=false;
         ResetRebuild(false);
         ResetPremiumRound();ResetEncounterFlow();
         frame = 0;
@@ -666,6 +669,8 @@ public sealed partial class GamePanel : Panel
 
     private void UpdateRound1(float step)
     {
+        if(!practiceActive&&roundOneParryPhase==0&&frame>=360)
+        {BeginRoundOneParryTutorial();return;}
         if (frame >= 1080)
         {
             BeginFirstGateStory();
@@ -841,15 +846,24 @@ public sealed partial class GamePanel : Panel
         if(!MelodySequenceActive&&melodySequenceCooldown<=0)StartMelodySequence();
         if(MelodySequenceActive)
         {
+            if(MelodyLaserApproaching)melodyLaserPreviousTip=MelodyLaserTip;
             melodyWordTimer-=step;
             if(melodyWordTimer<=0)
             {
-                AnnounceMelodyWord(melodyStep);
-                melodyInterval=melodyStep<3?melodyGaps[melodyStep]:42;
-                melodyWordTimer=melodyInterval;
-                if(melodyStep==2)audio.PlayLaserCharge((int)melodyInterval);
-                if(melodyStep==3){TriggerMelodyFinale();FinishMelodyBurstBeat();}
-                else melodyStep++;
+                if(melodyStep==3&&MelodyLaserApproaching)
+                {TriggerMelodyFinale();FinishMelodyBurstBeat();}
+                else
+                {
+                    AnnounceMelodyWord(melodyStep);
+                    melodyInterval=melodyStep<3?melodyGaps[melodyStep]:42;
+                    melodyWordTimer=melodyInterval;
+                    if(melodyStep==3)BeginMelodyLaserApproach();
+                    else
+                    {
+                        if(melodyStep==2)audio.PlayLaserCharge((int)melodyInterval);
+                        melodyStep++;
+                    }
+                }
             }
             return;
         }
@@ -860,6 +874,7 @@ public sealed partial class GamePanel : Panel
 
     private void StartMelodySequence()
     {
+        melodyLaserInFlight=false;
         bool followup=menheraMode&&melodyBurstActive&&melodyBurstRemaining<melodyBurstTotal;
         BeginMelodyBurst();
         hasGate=false;
@@ -867,7 +882,7 @@ public sealed partial class GamePanel : Panel
         melodyStep = followup?3:0;
         melodyInterval = followup?rng.Next(28,43):melodyGaps[0];
         melodyWordTimer = followup?melodyInterval:0;
-        if(followup){bossMessage="돼!";audio.PlayLaserCharge((int)melodyInterval);}
+        if(followup)BeginMelodyLaserApproach();
         bossShoutTimer = 45;
         if(!followup)bossMessage = MelodyWords[0];
         flashTimer = 6;
@@ -889,7 +904,7 @@ public sealed partial class GamePanel : Panel
 
         StartUltimateLaser();
 
-        // "돼!"의 판정 순간 발차기 중이어야 한다.
+        // Resolve when the visible beam reaches the kick range or its gauge ends.
         if (activeTimer>0 && activeSkill==ActivePower.Absorb && !ParryActive)
         { absorbedCount=Math.Min(12,absorbedCount+3);laserActive=false;audio.Play("absorb");return; }
         if (ParryActive)
@@ -917,8 +932,9 @@ public sealed partial class GamePanel : Panel
 
     private void StartUltimateLaser()
     {
+        bool alreadyFired=melodyLaserInFlight;melodyLaserInFlight=false;
         laserActive = true;
-        audio.Play("beam");
+        if(!alreadyFired)audio.Play("beam");
         laserReflected = false;
         laserTimer = 0;
         float targetX = px + PlayerWidth * 0.5f;
@@ -1151,7 +1167,7 @@ public sealed partial class GamePanel : Panel
             hp = Math.Min(PlayerMaxHealth, hp + PlayerMaxHealth * lifeStealPercent);
 
         if(TryBeginMelodyLastStand())return;
-        if(!PracticeLocksPhase&&round==4&&bossDamage>=10&&!menheraMode&&bossDamage<bossHitRequired)EnterMenheraMode();
+        if(!PracticeLocksPhase&&round==4&&bossHitRequired-bossDamage<=20&&!menheraMode&&bossDamage<bossHitRequired)EnterMenheraMode();
         if (!PracticeLocksPhase && round == 3 && !purgaeTransformed && bossDamage >= bossHitRequired * 0.5f && bossDamage < bossHitRequired)
             TriggerPurgaeTransformation();
 
@@ -1335,7 +1351,7 @@ public sealed partial class GamePanel : Panel
             if (ParryActive)
                 continue;
 
-            // 파괴옥 메테오는 실제 피격 때 현재 최대 체력의 50~100%를 적용한다.
+            // 파괴옥 메테오는 실제 피격 때 기준 피해 700의 50~100%를 적용한다.
             {
                 bool received = invuln <= 0 && hp > 0 && !(activeSkill==ActivePower.Dodge && activeTimer>0);
                 float damage=received?IncomingProjectileDamage(projectile):projectile.Damage;
@@ -1389,6 +1405,7 @@ public sealed partial class GamePanel : Panel
 
         if (gamePaused) return;
         if(HandleEncounterKey(e.KeyCode))return;
+        if(HandleRoundOneParryTutorialKey(e.KeyCode))return;
         if(state==GameState.Ending){HandleEndingKey(e.KeyCode);return;}
         if(state==GameState.AugmentSelect&&pendingDraft==3){HandleForgeKey(e.KeyCode);return;}
         if(state==GameState.AugmentSelect){HandleSkillChoiceKey(e.KeyCode);return;}
@@ -1722,6 +1739,7 @@ public sealed partial class GamePanel : Panel
         if(!DodgeActive)DrawUltimateLaser(g);
 
         DrawPlayer(g);
+        DrawPersistentParryRange(g);
         if(DodgeActive){foreach(var projectile in projectiles)if(!projectile.IsParried)DrawPremiumProjectile(g,projectile);DrawUltimateLaser(g);}
         DrawParryEffect(g);
         DrawCombatFeedback(g);
@@ -1736,6 +1754,7 @@ public sealed partial class GamePanel : Panel
     private void DrawUltimateLaser(Graphics g)
     {
         DrawLaserCharge(g);
+        DrawApproachingMelodyLaser(g);
         if(!laserActive||round!=4)return;
         if(laserReflected){if(cinematicTimer<=0||reducedEffects)DrawCounterLaser(g);return;}
         DrawGrandLaser(g,false);
