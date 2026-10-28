@@ -2,6 +2,14 @@ namespace CookieRunVS2026;
 
 public sealed partial class GamePanel
 {
+    private float IncomingProjectileDamage(Projectile projectile)
+    {
+        // Only round-three Purgae meteors scale with the current player's max HP.
+        // Resolve on contact so a clone uses its reduced max HP, not its old body.
+        return round==3&&projectile.Type==AttackType.Meteor
+            ?PlayerMaxHealth*rng.Next(50,101)/100f:projectile.Damage;
+    }
+
     private static RectangleF ProjectileDamageBounds(Projectile p)=>p.Type==AttackType.Meteor
         ?new(p.X+p.W*.19f,p.Y+p.H*.175f,p.W*.62f,p.H*.65f):p.Rect;
 

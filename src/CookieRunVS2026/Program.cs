@@ -1335,10 +1335,11 @@ public sealed partial class GamePanel : Panel
             if (ParryActive)
                 continue;
 
-            // 보스 기믹의 강공격/일반 공격은 기존 피해량 유지.
+            // 파괴옥 메테오는 실제 피격 때 현재 최대 체력의 50~100%를 적용한다.
             {
                 bool received = invuln <= 0 && hp > 0 && !(activeSkill==ActivePower.Dodge && activeTimer>0);
-                ReceiveHit(projectile.Damage, projectile.BurnOnHit ? "화상" : "피격", projectile.BurnOnHit ? Coral : Accent(round));
+                float damage=received?IncomingProjectileDamage(projectile):projectile.Damage;
+                ReceiveHit(damage, projectile.BurnOnHit ? "화상" : "피격", projectile.BurnOnHit ? Coral : Accent(round));
                 if (received && projectile.BurnOnHit)
                 {
                     burnTimer = Math.Max(burnTimer, PurgaeBurnDuration);

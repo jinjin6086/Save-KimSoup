@@ -25,11 +25,11 @@ public sealed partial class GamePanel
             new BriefingRule("바닥은 점프 · 공중은 슬라이드","지면 장애물은 ↑, 떠 있는 장애물은 ↓로 피하세요.","↑ / ↓",BriefingMove),
             new BriefingRule("10초마다 화면 상하반전","4초 뒤 돌아옵니다. 점프·슬라이드 키는 그대로.","↕",BriefingEvade),
             new BriefingRule("15초마다 적 시간 가속 ×2","4초간 적 공격·장애물만 2배. 플레이어 속도는 그대로.","×2",BriefingEvade),
-            new BriefingRule("시간정지 · 시계 리듬","W / E 빠른 리듬 6회. 실패 −3,000 · 성공 보스 −1.","W / E",BriefingReflect)},
+            new BriefingRule("시간정지 · 시계 리듬","W / E 6회 · 판정 ±8프레임. 실패 −3,000 · 성공 −1.","W / E",BriefingReflect)},
         3=>new[]{
             new BriefingRule("돌덩이 · 화염구 · 구슬 반사","공격이 가까워지면 발차기로 보스에게 돌려주세요.","SPACE",BriefingReflect),
             new BriefingRule("광폭화 후 붉은 구슬 주의","맞으면 화상을 입습니다. 반사하거나 피하세요.","주의",BriefingEvade),
-            new BriefingRule("집중 메테오는 위로 반사","플레이어 위치에 쏟아집니다. 보스 피해는 없습니다.","SPACE",BriefingReflect),
+            new BriefingRule("집중 메테오는 위로 반사","피격: 최대 체력 50~100%. 반사 시 보스 피해 없음.","SPACE",BriefingReflect),
             new BriefingRule("광폭화 중 보스 피해 50% 감소","5회 명중할 때마다 방어가 5초 동안 사라집니다.","5회",BriefingReflect)},
         4=>new[]{
             new BriefingRule("음표는 발차기로 반사","대사를 외우는 동안에도 음표가 계속 날아옵니다.","SPACE",BriefingReflect),

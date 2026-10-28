@@ -1,0 +1,33 @@
+{
+  "scope": "Current meteor source plus extracted actual collision, hit, rhythm-key and rhythm-failure methods; graphics/audio stubbed; no Windows GUI exercised",
+  "checks": 27,
+  "passed": [
+    "Player 0, clone False: 50% endpoint",
+    "Player 0, clone False: 100% endpoint",
+    "Player 1, clone False: 50% endpoint",
+    "Player 1, clone False: 100% endpoint",
+    "Player 0, clone True: 50% endpoint",
+    "Player 0, clone True: 100% endpoint",
+    "Player 1, clone True: 50% endpoint",
+    "Player 1, clone True: 100% endpoint",
+    "Meteor scales from maximum, not remaining health",
+    "Optional final-boss meteor retains fixed damage",
+    "Ordinary projectile retains fixed damage",
+    "Reflected meteor does no contact damage or random roll",
+    "Active reflection window does no damage or random roll",
+    "Dodge still prevents meteor damage",
+    "Explicit cinematic/revival protection retains immunity",
+    "Seeded rolls remain within inclusive 50..100 percent",
+    "Rhythm restores exact v1.16 eight-frame window",
+    "Correct rhythm key accepted at -8 frames",
+    "Correct rhythm key accepted at -7 frames",
+    "Correct rhythm key accepted at 0 frames",
+    "Correct rhythm key accepted at 7 frames",
+    "Correct rhythm key accepted at 8 frames",
+    "Rhythm outside window still fails at -8.01 frames",
+    "Rhythm outside window still fails at 8.01 frames",
+    "Wrong rhythm key still fails",
+    "Escape is not treated as a rhythm mistake",
+    "Six edge-window hits complete the rhythm"
+  ]
+}
