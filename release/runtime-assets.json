@@ -462,5 +462,7 @@
       "bytes": 2261362,
       "sha256": "9c8eefb6084dbc075d2102d89e672ff505fc0e2eac37b9b902d72038628cf918"
     }
-  ]
+  ],
+  "scope": "Historical original home-PC 1.17 assets only",
+  "recovery_manifest": "The recovery ZIP has its own asset manifest: 자원 목록.json"
 }

@@ -21,5 +21,22 @@
     "gpu_capture_verified": true,
     "full_manual_playtest": false,
     "subjective_listening": false
+  },
+  "metadata_scope": "Historical original home-PC 1.17 build; not the recovery ZIP",
+  "github_distribution": {
+    "draft": true,
+    "asset_count": 0,
+    "checked_date": "2026-10-28",
+    "public_download_ready": false
+  },
+  "verification_origin": "Pre-existing home-build record; its 144 checks and GPU review were not repeated for the recovery build",
+  "recovery_build": {
+    "metadata": "release/1.17-recovery.json",
+    "changelog": "release/1.17-recovery.md",
+    "version": "1.17-recovery",
+    "file": "SeungKuRun-1.17-Windows-x64.zip",
+    "bytes": 328141287,
+    "sha256": "866ef909a9c9e6a3000cebb51abaf456ebdf57cdd18d84b4558c08fab71d7c31",
+    "github_release_asset_uploaded": false
   }
 }

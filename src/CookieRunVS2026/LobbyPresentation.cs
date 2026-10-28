@@ -44,9 +44,14 @@ public sealed partial class GamePanel
                 keys[i]=new Bitmap(poseWidth,poseHeight,PixelFormat.Format32bppPArgb);
                 using var cg=Graphics.FromImage(keys[i]);
                 cg.InterpolationMode=InterpolationMode.HighQualityBicubic;
-                Image? hd=i==0?hdOpen:hdClosed;
-                if(hd!=null)cg.DrawImage(hd,new Rectangle(0,0,poseWidth,poseHeight));
-                else cg.DrawImage(atlas,new Rectangle(0,0,poseWidth,poseHeight),new Rectangle(i*cell,0,cell,atlas.Height),GraphicsUnit.Pixel);
+                // The middle cell is the partly closed hand. Using the closed
+                // HD pose for it skipped that keyframe and made the squeeze snap.
+                Image? hd=i==0?hdOpen:i==2?hdClosed:null;
+                int sourceWidth=hd?.Width??cell,sourceHeight=hd?.Height??atlas.Height;
+                float fit=Math.Min(poseWidth/(float)sourceWidth,poseHeight/(float)sourceHeight);
+                var bounds=new RectangleF((poseWidth-sourceWidth*fit)/2,poseHeight-sourceHeight*fit,sourceWidth*fit,sourceHeight*fit);
+                if(hd!=null)cg.DrawImage(hd,bounds);
+                else cg.DrawImage(atlas,bounds,new Rectangle(i*cell,0,cell,atlas.Height),GraphicsUnit.Pixel);
             }
             // Bake the open-hand -> resolve motion once, rather than running
             // pixel blending during the game loop. Original key art is retained.
