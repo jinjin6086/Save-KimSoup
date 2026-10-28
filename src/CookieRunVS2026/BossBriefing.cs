@@ -24,7 +24,7 @@ public sealed partial class GamePanel
             new BriefingRule("탄환은 발차기로 반사","부채꼴로 날아오는 탄환이 닿기 직전에 발차기.","SPACE",BriefingReflect),
             new BriefingRule("바닥은 점프 · 공중은 슬라이드","지면 장애물은 ↑, 떠 있는 장애물은 ↓로 피하세요.","↑ / ↓",BriefingMove),
             new BriefingRule("10초마다 화면 상하반전","4초 뒤 돌아옵니다. 점프·슬라이드 키는 그대로.","↕",BriefingEvade),
-            new BriefingRule("15초마다 적 시간 가속 ×2","4초간 적 공격·장애물만 2배. 플레이어 속도는 그대로.","×2",BriefingEvade),
+            new BriefingRule("15초마다 적 시간 가속 ×1.3","4초간 적 공격·장애물만 1.3배. 플레이어 속도는 그대로.","×1.3",BriefingEvade),
             new BriefingRule("시간정지 · 시계 리듬","W / E 6회 · 판정 ±8프레임. 실패 −3,000 · 성공 −1.","W / E",BriefingReflect)},
         3=>new[]{
             new BriefingRule("돌덩이 · 화염구 · 구슬 반사","공격이 가까워지면 발차기로 보스에게 돌려주세요.","SPACE",BriefingReflect),
